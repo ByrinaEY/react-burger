@@ -1,0 +1,32 @@
+.section {
+    width: 600px;
+}
+
+.scroll{
+    overflow-y: auto;
+    max-height: 464px;
+    scrollbar-width: thin;
+    padding: 0;
+    list-style: none;
+   
+}
+
+.ingredient{
+    display: flex; 
+    align-items: center;
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+
+.icon{
+    transform: scale(1.5);
+    transform-origin: top left;
+    width: 36px;
+    height: 32px;
+    
+}
