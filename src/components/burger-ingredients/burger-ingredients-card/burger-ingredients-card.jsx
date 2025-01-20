@@ -8,7 +8,7 @@ function BurgerIngredientsCard({ title, data }) {
         <div className={styles.title}>
             <h2 className="text text_type_main-medium mb-6">{title}</h2>
             <div className={`${styles.card} ml-4 mr-4 mb-10;`}>
-            {data.map((item, index) => <BurgerIngredientElement key={index} data={item} />)}
+            {data.map((item) => <BurgerIngredientElement key={item._id} data={item} />)}
             </div>
         </div>
     )
@@ -20,3 +20,4 @@ BurgerIngredientElement.PropTypes ={
 }
 
 export default BurgerIngredientsCard;
+

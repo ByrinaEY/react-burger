@@ -8,7 +8,7 @@ function BurgerIngredientElement ({data}){
     return(
     <div className={`${styles.element} ml-4 mr-4 mt-6 mb-8`}>
     
-        <img className={`${styles.image} ml-4 mb-1`} src={data.image} />
+        <img className={`${styles.image} ml-4 mb-1`} src={data.image} alt={data.name} />
         <Counter count={1} size="default" extraClass="m-1" />
         <div className={`${styles.price} mb-1`}>
             <span className="text text_type_main-default mr-4">{data.price}</span>
