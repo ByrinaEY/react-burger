@@ -4,3 +4,12 @@
     margin-right: 10;
    
 }
+
+.app {
+    font-family: sans-serif;
+    max-width: 538px;
+    margin: 0 auto;
+    padding: 48px 0;
+  }
+
+  
