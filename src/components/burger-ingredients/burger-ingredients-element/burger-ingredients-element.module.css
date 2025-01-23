@@ -1,0 +1,20 @@
+.element{
+    align-items: center;
+    position: relative;
+}
+.element-image {
+    width: 240px;
+    height: 120px;
+    align-items: center;
+   
+} 
+.price {
+    display: flex;
+    justify-content: center;
+   
+}
+
+.caption {
+    text-align: center;
+    
+}
