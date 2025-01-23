@@ -13,13 +13,18 @@ function App() {
   const getIngredients = () => {
     setState({ ...state, hasError: false, isLoading: true });
     fetch(DOMAIN)
-      .then(res => res.json())
+      .then(res => {
+        if (res.status !==200){
+          alert(`Ошибка ${res.status}: ${res.statusText}`);
+        }
+        return res.json();
+        })
       .then(ingredients => setState({ ...state, ingredients, isLoading: false }))
       .catch(e => {
         setState({ ...state, hasError: true, isLoading: false });
       });
   };
-
+  
   useEffect(() => { getIngredients(); }, []);
   return (
     <main>

@@ -30,7 +30,7 @@ function IngredientDetails({ ingredient }) {
 
 };
 
-IngredientDetails.PropTypes = {
-    ingredient: PropTypes.arrayOf(dataPropTypes.isRequired).isRequired}; 
+IngredientDetails.propTypes = {
+    ingredient: dataPropTypes.isRequired}; 
 
 export default IngredientDetails;

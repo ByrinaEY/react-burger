@@ -15,7 +15,7 @@ function BurgerIngredientsCard({ title, data }) {
 }
 
 BurgerIngredientElement.PropTypes ={
-    data: PropTypes.arrayOf(dataPropTypes).isRequired,
+    data: PropTypes.arrayOf(dataPropTypes.isRequired).isRequired,
     title: PropTypes.string
 }
 

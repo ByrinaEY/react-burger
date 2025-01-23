@@ -15,8 +15,8 @@ function OrderDetails({numberOfOrder}) {
         </div>)
 
 }
-OrderDetails.PropTypes ={
-    numberOfOrder: PropTypes.string  
+OrderDetails.propTypes ={
+    numberOfOrder: PropTypes.string.isRequired  
 }
 
 

@@ -38,9 +38,9 @@ function BurgerIngredientElement({ data }) {
     )
 }
 
-BurgerIngredientElement.PropTypes = {
-    data: PropTypes.arrayOf(dataPropTypes).isRequired
-}
+BurgerIngredientElement.propTypes = {
+    data: dataPropTypes.isRequired}; 
+
 export default BurgerIngredientElement;
 
 

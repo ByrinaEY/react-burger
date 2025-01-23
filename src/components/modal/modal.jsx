@@ -33,12 +33,12 @@ function Modal({ title, onClose, children }) {
             </div>
             <ModalOverlay onClose={onClose} />
         </div>
-    , document.body);
+    , document.getElementById('modals'));
 }
 
-Modal.PropTypes = {
+Modal.propTypes = {
     title: PropTypes.string, 
-    onClose: PropTypes.func, 
+    onClose: PropTypes.func.isRequired, 
     children: PropTypes.element
 }
 export default Modal;
