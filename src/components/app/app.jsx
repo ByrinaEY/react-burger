@@ -4,39 +4,31 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx'
 import styles from './app.module.css';
 import React, { useEffect, useState } from 'react';
-import { DOMAIN } from '../utils/server.js';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { loadIngredientsAction } from '../../services/actions/burger-ingredients.js';
+import { loadIngredients } from '../../services/selectors.js';
 
 
 
 function App() {
-  const [state, setState] = useState({ isLoading: false, hasError: false, ingredients: null });
-  const getIngredients = () => {
-    setState({ ...state, hasError: false, isLoading: true });
-    fetch(DOMAIN)
-      .then(res => {
-        if (res.status !==200){
-          alert(`Ошибка ${res.status}: ${res.statusText}`);
-        }
-        return res.json();
-        })
-      .then(ingredients => setState({ ...state, ingredients, isLoading: false }))
-      .catch(e => {
-        setState({ ...state, hasError: true, isLoading: false });
-      });
-  };
+ 
+  const {isLoading, hasError, ingredients} = useSelector(loadIngredients);
+  const dispatch = useDispatch();
+ 
   
-  useEffect(() => { getIngredients(); }, []);
+  useEffect(() => { dispatch(loadIngredientsAction()); }, [dispatch]);
   return (
     <main>
-      {(state.isLoading || state.hasError) ?
+      {(isLoading || hasError) ?
         (<p>
-          {state.isLoading ? 'Загрузка...' : state.hasError ? 'Произошла ошибка' : undefined}</p>) :
-        state.ingredients && (
+          {isLoading ? 'Загрузка...' : hasError ? 'Произошла ошибка' : undefined}</p>) :
+        ingredients && ingredients.length>0 && (
           <>
             <AppHeader />
             <div className={styles.main}>
-              <BurgerIngredients data={state.ingredients.data} />
-              <BurgerConstructor data={state.ingredients.data} />
+              <BurgerIngredients />
+              <BurgerConstructor />
             </div>
           </>)}
     </main>

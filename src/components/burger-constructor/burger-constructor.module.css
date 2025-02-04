@@ -30,3 +30,14 @@
     height: 32px;
     
 }
+
+.empty-element {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: var(--background);
+}
+
+.empty-element-text {
+    flex: 1;
+}

@@ -1,9 +1,16 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 import { dataPropTypes } from '../utils/data-prop-types';
-function IngredientDetails({ ingredient }) {
+import {useSelector } from 'react-redux';
+import {getDataOfIngredient} from '../../services/selectors'
+
+
+function IngredientDetails() {
+    const {ingredient} = useSelector(getDataOfIngredient);
+   
     return (
         <div>
+            {console.log("Проверка:", ingredient)}
             <img className={styles.image} src={ingredient.image} alt={ingredient.name} />
             <p className={'text text_type_main-medium mt-4'}>{ingredient.name}</p>
             <div className={`${styles.CPFC} mt-8 mb-15`}>
