@@ -3,7 +3,7 @@ import {
     ADD_INGREDIENT,
     DELETE_INGREDIENT,
     SET_TOTAL,
-    SWAP_INGREDIENTS
+    SWAP_INGREDIENT
 } from '../actions/burger-constructor';
 
 
@@ -22,20 +22,11 @@ export function burgerConstructorReducer(state = initialState, action) {
             return { ...state, ingredients: [...state.ingredients, action.item] };
         case DELETE_INGREDIENT:
             return {...state, ingredients: [...state.ingredients].filter((_item, index) => index !== action.index)};
-        case SWAP_INGREDIENTS:
+        case SWAP_INGREDIENT:
             const newState = { ...state, ingredients: [...state.ingredients] };
             [newState.ingredients[action.index1], newState.ingredients[action.index2]] = [newState.ingredients[action.index2], newState.ingredients[action.index1]];
             return newState;
-            // const contentItems = [...state.burgerIngredients.contentItems];
-			// contentItems.splice(action.toIndex, 0,contentItems.splice(action.fromIndex,1)[0]);
-			// return {
-			// 	...state,
-			// 	burgerIngredients: {
-			// 		...state.burgerIngredients,
-			// 		contentItems: contentItems
-			// 	}
-			// };
-        case SET_TOTAL:
+            case SET_TOTAL:
             return { ...state, total: action.sum };
         default:
             return state;
