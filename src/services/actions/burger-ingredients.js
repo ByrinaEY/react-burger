@@ -2,19 +2,14 @@
 export const LOAD_INGREDIENTS_START = "LOAD_INGREDIENTS_START";
 export const LOAD_INGREDIENTS_SUCCESS = "LOAD_INGREDIENTS_SUCCESS";
 export const LOAD_INGREDIENTS_ERROR = "LOAD_INGREDIENTS_ERROR";
-import { DOMAIN } from '../../components/utils/server';
+import { INGREDIENTS } from '../../components/utils/server';
+import dataLoad from '../../components/utils/data-load.js';
 
 export function loadIngredientsAction() {
     return function(dispatch) {
         dispatch({type: LOAD_INGREDIENTS_START});
-		fetch(DOMAIN)
-        .then(res => {
-            if (res.status !==200){
-              alert(`Ошибка ${res.status}: ${res.statusText}`);
-            }
-            return res.json();
-            })
-			.then(result => {
+		dataLoad(INGREDIENTS)
+		.then(result => {
                	dispatch({
 					type: LOAD_INGREDIENTS_SUCCESS,
 					data: result.data

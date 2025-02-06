@@ -1,4 +1,6 @@
-export const DOMAIN = "https://norma.nomoreparties.space/api/ingredients";
+export const URL = "https://norma.nomoreparties.space/api/";
 
-export const ORDER = "https://norma.nomoreparties.space/api/orders";
+export const INGREDIENTS = "ingredients";
+
+export const ORDER = "orders";
 
