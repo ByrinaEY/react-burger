@@ -3,7 +3,7 @@ import {URL} from './server';
 
 
 
-export default function dataLoad(endPoint){
+export default function getDataFromServer(endPoint){
     return request(`${URL}${endPoint}`)
    
 }
