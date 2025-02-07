@@ -1,0 +1,24 @@
+.section {
+   
+    width: 600px;
+    
+}
+.tab{
+    gap: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.scroll {
+    overflow-y: auto;
+    max-height: 660px;
+    scrollbar-width: thin;
+    padding: 0;
+    list-style: none;
+    margin-top: 4;
+    margin-bottom: 4;
+}
+
+.h1{
+    text-align: left;
+}
