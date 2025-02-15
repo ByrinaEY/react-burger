@@ -1,0 +1,12 @@
+
+.main{
+    width: 478px;
+    height: 480px;
+    
+}
+
+.bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,3 +5,17 @@
     padding: 2rem;
     text-align: center;
 }
+.container{
+    justify-content: flex-start;
+    position: absolute; 
+    top: 228px;
+    left: 760px;
+    
+}
+.page-container-profile{
+    justify-content: flex-start;
+    position: absolute; 
+    top: 228px;
+    left: 380px; 
+   
+}
