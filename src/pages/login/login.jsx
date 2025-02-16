@@ -1,6 +1,7 @@
 import {EmailInput, PasswordInput, Button  } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useState} from 'react';
 import styles from './login.module.css';
+import { Link } from 'react-router-dom';
 
 export  function Login (){
     const [state, setState] = useState({email:"",password:""  })
@@ -17,11 +18,15 @@ export  function Login (){
             <Button htmlType="button" type="primary" size="medium" extraClass="mb-20">Войти</Button>
             <div className={styles.bottom}>
                 <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?</p>
+                <Link to ='/register' className={styles.link}>
                 <Button htmlType="button" type="secondary" size="medium">Зарегистрироваться</Button>
+                </Link>
             </div>
             <div className={styles.bottom}>
                 <p className="text text_type_main-default text_color_inactive">Забыли пароль?</p>
+                <Link to ='/forgot-password' className={styles.link}>
                 <Button htmlType="button" type="secondary" size="medium">Восстановить пароль</Button>
+                </Link>
             </div>
         </div>
         </div>

@@ -11,15 +11,7 @@ export function Profile() {
 
     return (
         <div>
-            <div className={"container"}>
-                <div className={styles.main}>
-                    <p className="text text_type_main-medium mb-6">Регистрация</p>
-                    <Input placeholder="Имя" extraClass="mb-6" name="name" value={state.name} onChange={onChange} icon={'EditIcon'} />
-                    <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email} onChange={onChange} icon={'EditIcon'} />
-                    <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange} icon={'EditIcon'} />
-                </div>
-            </div>
-            <div className={"page-container-profile"}>
+        <div className={"page-container-profile"}>
                 <ul className={styles.ul}>
                     <li>
                         <p className="text text_type_main-large">Профиль</p>
@@ -33,6 +25,15 @@ export function Profile() {
                 </ul>
                 <p className={`${styles.p} text text_type_main-default text_color_inactive mt-20`}>В этом разделе вы можете изменить свои персональные данные</p>
             </div>
+            <div className={"container"}>
+                
+                    <p className="text text_type_main-medium mb-6">Регистрация</p>
+                    <Input placeholder="Имя" extraClass="mb-6" name="name" value={state.name} onChange={onChange} icon={'EditIcon'} />
+                    <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email} onChange={onChange} icon={'EditIcon'} />
+                    <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange} icon={'EditIcon'} />
+                </div>
+           
+            
         </div>
     )
 }
