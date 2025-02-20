@@ -8,7 +8,7 @@ import { resetPWAction } from '../../services/actions/auth';
 import { AUTH_CLEAR_ERRORS} from '../../services/actions/auth'
 
 export function ResetPassword() {
-    const [state, setState] = useState({ token: "", password: "" })
+    const [state, setState] = useState({ password: "", token: ""})
     const onChange = e => {
         if (e.target.name === 'token') {
             setState({ ...state, token: e.target.value });
@@ -18,6 +18,7 @@ export function ResetPassword() {
     }
     const dispatch = useDispatch();
     const { requestStart, requestError, requestSuccess } = useSelector(auth);
+    
     function resetPassword() {
         dispatch(resetPWAction(state));
     }

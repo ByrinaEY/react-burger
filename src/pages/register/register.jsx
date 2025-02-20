@@ -26,7 +26,7 @@ export  function Register (){
         if (requestSuccess) {
             dispatch({type: AUTH_CLEAR_ERRORS});
             alert("Вы успешно зарегистрированы!") ;
-        }
+        } 
        
     }, [requestSuccess]);
       

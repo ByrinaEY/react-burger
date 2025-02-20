@@ -2,16 +2,14 @@ import {URL} from './server';
  import request from './check-response';
 
 
-
-export default  function getDataWithPost(endPoint, data){
+export default function logoutUser(endPoint) {
     return request(`${URL}${endPoint}`, {
-        method: 'POST',
+        method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(data)
-    })
-   
-};
-
-
+        body: JSON.stringify({ 
+            token: localStorage.getItem("refreshToken") 
+        })
+    });
+}

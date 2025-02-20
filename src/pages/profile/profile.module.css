@@ -6,7 +6,15 @@
     width: 320px;
     list-style-type:  none;
     padding-left: 0;
+    display: inline;
+
    
+}
+
+.li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+    height: 64px;
 }
 .p{
     width: 320px;

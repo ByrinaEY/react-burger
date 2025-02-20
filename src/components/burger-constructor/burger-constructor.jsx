@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback} from 'react';
 import { ConstructorElement, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
@@ -12,10 +12,16 @@ import { SET_BUN, SET_TOTAL, DELETE_INGREDIENT} from '../../services/actions/bur
 import {createOrderAction} from '../../services/actions/create-order.js';
 import {createUniqKeyForIngredientAction} from '../../services/actions/burger-constructor.js'
 import BurgerConstructorIngredient from './burger-constructor-ingredient/burger-constructor-ingredient.jsx';
+import { useNavigate } from 'react-router';
+import {auth} from '../../services/selectors.js';
 
 function BurgerConstructor() {
     const { ingredients, bun, total } = useSelector(getIngredientsFromConstructor);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { userLoggedIn, requestStart } = useSelector(auth);
+
     const [isOpenModal, setIsOpenModal] = useState(false);
     function showModalWindow() {
         setIsOpenModal(true);
@@ -60,7 +66,14 @@ function BurgerConstructor() {
         dispatch({ type: DELETE_INGREDIENT, index: index })
     };
     
- function createOrder(){
+ const createOrder= useCallback(() => {
+    if (requestStart) {
+        return;
+    }
+    if (!userLoggedIn) {
+        navigate("/login", { replace: true });
+    } else {
+
     let orderIngredients=[];
     for(let item of ingredients){
         orderIngredients.push(item._id);
@@ -68,9 +81,9 @@ function BurgerConstructor() {
     if (bun) {
         orderIngredients.push(bun._id, bun._id);
     }
-    dispatch(createOrderAction(orderIngredients));
+    dispatch(createOrderAction(orderIngredients));}
        showModalWindow();
-    };
+    }, [requestStart, userLoggedIn, navigate, ingredients, bun, dispatch]);
     
 
     return (
