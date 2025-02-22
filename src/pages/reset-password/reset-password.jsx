@@ -7,6 +7,7 @@ import {auth } from '../../services/selectors';
 import { resetPWAction } from '../../services/actions/auth';
 import { AUTH_CLEAR_ERRORS} from '../../services/actions/auth'
 
+
 export function ResetPassword() {
     const [state, setState] = useState({ password: "", token: ""})
     const onChange = e => {
@@ -30,7 +31,7 @@ export function ResetPassword() {
        
     }, [requestSuccess]);
     return (
-        <div className={"container"}>
+        <div className={styles.registration}>
              {( requestStart || requestError) ?
                  (<p> { requestStart ? 'Загрузка...' : requestError ? 'Произошла ошибка' : undefined}</p>) :
                  requestSuccess ?  alert ('Пароль сброшен') :

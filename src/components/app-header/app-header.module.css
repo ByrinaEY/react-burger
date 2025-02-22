@@ -1,12 +1,13 @@
 .header {
     background: var(--background);
     width: 1920px;
+   
 }
 
 .container {
     display: flex;
     width: var(--width-outer);
-    margin: 0 auto;
+    padding: 0 380px;
 }
 
 .center {

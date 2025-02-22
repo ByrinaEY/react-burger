@@ -11,9 +11,9 @@ export  function Login (){
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(authGetUserAction());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(authGetUserAction());
+    // }, [dispatch]);
 
 
     const [state, setState] = useState({email:"",password:""  })

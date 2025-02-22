@@ -10,24 +10,32 @@ import { SET_DISPLAYES_INGREDIENT } from '../../../services/actions/ingredients-
 import { useDrag } from 'react-dnd';
 import {  getIngredientsFromConstructor } from '../../../services/selectors.js';
 import { useMemo } from 'react';
-import {useNavigate } from 'react-router-dom';
+import {useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect} from 'react';
 
 
 function BurgerIngredientElement({ dataItem }) {
     const { ingredients, bun } = useSelector( getIngredientsFromConstructor);
     const navigate = useNavigate();
     const [isOpenModal, setIsOpenModal] = useState(false);
-    
+    const location = useLocation();
+        
     function showModalWindow() {
       setIsOpenModal(true);
-      navigate("/login");
+         
     };
     function closeModalWindow() {
-      
       setIsOpenModal(false);
-      navigate("/login");
-       
+     
     };
+
+    useEffect(() => {
+        if (isOpenModal == false) {
+            navigate("/", { replace: true });
+        }
+       
+    }, [isOpenModal]);
+    
 
     const count = useMemo(() => {
         if (bun && bun._id === dataItem._id){

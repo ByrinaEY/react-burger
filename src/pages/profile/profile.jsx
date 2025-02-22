@@ -7,8 +7,8 @@ import { Outlet } from 'react-router-dom';
 export function Profile() {
     
    return (
-        <div>
-        <div className={"page-container-profile"}>
+        <div className={styles.parent}>
+        <div className={styles.container}>
                 <ul className={styles.ul}>
                     <li className={styles.li}>
                     <NavLink to="" end style={{ textDecoration: 'none' }}>{({ isActive }) => (
