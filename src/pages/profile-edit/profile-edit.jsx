@@ -5,6 +5,7 @@ import {auth } from '../../services/selectors';
 import { useNavigate } from 'react-router-dom';
 import {useForm} from '../../components/hook/useForm';
 import {authPatchUserAction, AUTH_CLEAR_ERRORS} from '../../services/actions/auth';
+import styles from './profile-edit.module.css';
 
 
 export  function ProfileEdit(){
@@ -42,10 +43,7 @@ export  function ProfileEdit(){
 
  
 return(
-    
-     <form className={"container"}  onSubmit={onSubmit} onReset={onReset}>
-
-    <p className="text text_type_main-medium mb-6">Регистрация</p>
+     <form className={styles.registration}  onSubmit={onSubmit} onReset={onReset}>
     <Input placeholder="Имя" extraClass="mb-6" name="name" value={state.name} onChange={onChange} icon={'EditIcon'} />
     <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email}  onChange={onChange} icon={'EditIcon'} />
     <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange} icon={'EditIcon'} />

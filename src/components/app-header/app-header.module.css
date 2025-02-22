@@ -1,5 +1,6 @@
 .header {
     background: var(--background);
+    width: 1920px;
 }
 
 .container {

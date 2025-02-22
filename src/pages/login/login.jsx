@@ -47,18 +47,19 @@ export  function Login (){
             <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email} onChange={onChange}/>
             <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange}/>
             <Button htmlType="button" type="primary" size="medium" extraClass="mb-20" onClick={login}>Войти</Button>
-            <div className={styles.bottom}>
-                <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?</p>
+           
+                <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?
                 <Link to ='/register' className={styles.link}>
-                <Button htmlType="button" type="secondary" size="medium">Зарегистрироваться</Button>
+                <Button htmlType="button" type="secondary" size="medium" >Зарегистрироваться</Button>
                 </Link>
-            </div>
-            <div className={styles.bottom}>
-                <p className="text text_type_main-default text_color_inactive">Забыли пароль?</p>
+                </p>
+           
+                <p className="text text_type_main-default text_color_inactive">Забыли пароль?
                 <Link to ='/forgot-password' className={styles.link}>
                 <Button htmlType="button" type="secondary" size="medium">Восстановить пароль</Button>
                 </Link>
-            </div>
+                </p>
+           
         </div>
         </div>
     )

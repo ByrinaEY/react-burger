@@ -13,17 +13,17 @@ import { loadIngredients } from '../../services/selectors.js';
 
     const { isLoading, hasError, ingredients } = useSelector(loadIngredients);
     const dispatch = useDispatch();
-
+-
 
     useEffect(() => { dispatch(loadIngredientsAction()); }, [dispatch]);
     return (
-        <main>
+        <main className={styles.main}>
             {(isLoading || hasError) ?
                 (<p>
                     {isLoading ? 'Загрузка...' : hasError ? 'Произошла ошибка' : undefined}</p>) :
                 ingredients && ingredients.length > 0 && (
                     <>
-                        <div className={styles.main}>
+                        <div className={styles.div}>
                             <BurgerIngredients />
                             <BurgerConstructor />
                         </div>
