@@ -5,8 +5,6 @@ import { authLogoutAction, AUTH_CLEAR_ERRORS } from '../../services/actions/auth
 import { auth } from '../../services/selectors';
 
 
-
-
 export function ProfileLogout() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,9 +22,14 @@ export function ProfileLogout() {
 
     useEffect(() => {
         if (started && requestError) {
-            alert(`[Выход] ${requestError}`);
-            dispatch({type: AUTH_CLEAR_ERRORS});
+            dispatch({ type: AUTH_CLEAR_ERRORS });
             setStarted(false);
+            return (
+                <div >
+                    <p >{`[Выход] ${requestError}`}</p>
+                </div>
+            );
+
         } else if (started && requestSuccess) {
             navigate("/login", { replace: true });
         }

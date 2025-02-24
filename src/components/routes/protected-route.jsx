@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
-import { auth } from '../services/selectors';
-import { authGetUserAction } from '../services/actions/auth';
-import {URL_LOGIN}  from './utils/server';
+import { auth } from '../../services/selectors';
+import { authGetUserAction } from '../../services/actions/auth';
+
 
 
 function ProtectedRoute({ element }) {
@@ -22,12 +22,14 @@ function ProtectedRoute({ element }) {
 
     useEffect(() => {
         if (requestError) {
-            navigate(URL_LOGIN, { replace: true, state: { from: location } });
+            navigate("/login", { replace: true, state: { from: location } });
             return undefined;
         }
     }, [requestError, navigate, location]);
 
-    return requestStart || user.name === "" ? alert("Загрузка") : element;
+   
+
+    return requestStart || user.name === "" ? <p >Загрузка...</p>: element;
 }
 
 ProtectedRoute.propTypes = {

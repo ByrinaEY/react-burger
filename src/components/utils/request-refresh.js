@@ -1,5 +1,5 @@
 
-import {setCookie , getCookie} from "./cookie";
+import {setCookie } from "./cookie";
 
 
 export default async function requestRefresh(url, options) {

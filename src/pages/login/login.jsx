@@ -4,39 +4,35 @@ import styles from './login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {auth } from '../../services/selectors';
-import { authLoginAction,authGetUserAction } from '../../services/actions/auth';
-import { AUTH_CLEAR_ERRORS} from '../../services/actions/auth';
+import { authLoginAction} from '../../services/actions/auth';
+
 
 export  function Login (){
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(authGetUserAction());
-    // }, [dispatch]);
-
-
-    const [state, setState] = useState({email:"",password:""  })
+    
+    const [data, setData] = useState({email:"",password:""  })
     const onChange = e => {
         if (e.target.name === 'email') {
-            setState({ ...state, email: e.target.value });
-        }else{setState({ ...state, password: e.target.value})}
+            setData({ ...data, email: e.target.value });
+        }else{setData({ ...data, password: e.target.value})}
     };
     
 
     const { userLoggedIn, requestSuccess } = useSelector(auth);
 
     function login(){
-        dispatch(authLoginAction(state));
+        if (!userLoggedIn) {
+        dispatch(authLoginAction(data));}
     }
     useEffect(() => {
         if (userLoggedIn) {
-            // dispatch({type: AUTH_CLEAR_ERRORS});
             alert("Вы успешно вошли в систему!") ;
             navigate("/", { replace: true });
         } 
        
-    }, [requestSuccess, userLoggedIn,  navigate, dispatch]);
+    }, [requestSuccess,  navigate, dispatch]);
 
     
       
@@ -44,8 +40,8 @@ export  function Login (){
         <div className = {"container"}>
         <div className = {styles.main}>
             <p className="text text_type_main-medium mb-6">Вход</p>
-            <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email} onChange={onChange}/>
-            <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange}/>
+            <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={data.email} onChange={onChange}/>
+            <PasswordInput name={'password'} extraClass="mb-6" value={data.password} onChange={onChange}/>
             <Button htmlType="button" type="primary" size="medium" extraClass="mb-20" onClick={login}>Войти</Button>
            
                 <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?

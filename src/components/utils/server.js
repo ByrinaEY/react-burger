@@ -18,5 +18,4 @@ export const TOKEN = "auth/token";
 
 export const API_USER = "auth/user";
 
-export const URL_LOGIN = "/auth/login";
 
