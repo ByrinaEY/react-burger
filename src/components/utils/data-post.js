@@ -9,7 +9,7 @@ export default  function getDataWithPost(endPoint, data){
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({...data})
     })
    
 };

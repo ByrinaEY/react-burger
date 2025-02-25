@@ -30,9 +30,7 @@ function App() {
                      <Route path="/" element={<MainPage />} />
                      <Route path={`/ingredients/:ingredientId`} element={<IngredientPage />} />
                      <Route path="/register" element={<AuthRoute element={<Register />} />}/>
-                     {/* <Route path="/register" element={<Register />} /> */}
                      <Route path="/login" element={<AuthRoute element={<Login />} />}/> 
-                     {/* <Route path="/login" element={<Login />} />  */}
                      <Route path="/forgot-password" element={<ForgotPassword />} />
                      <Route path="/reset-password" element={<ResetPassword />} />
                      <Route path="/profile" element={<ProtectedRoute element={<Profile />} />}>

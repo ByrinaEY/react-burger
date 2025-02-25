@@ -2,7 +2,7 @@
 import { setCookie, deleteCookie } from "../../components/utils/cookie";
 import { FORGOT_PASSWORD, RESET_PASSWORD, REGISTER, LOGIN, API_USER, LOGOUT } from '../../components/utils/server';
 import getDataWithPost from '../../components/utils/data-post';
-import  {getUser, patchUser} from '../../components/utils/load-data-refresh';
+import { getUser, patchUser } from '../../components/utils/load-data-refresh';
 import logoutUser from '../../components/utils/logout';
 
 
@@ -57,10 +57,10 @@ export function authRegisterAction(form) {
     }
 }
 
-export function authLoginAction(form) {
+export function authLoginAction(user) {
     return function (dispatch) {
         dispatch({ type: AUTH_LOGIN_START });
-        getDataWithPost(LOGIN, form)
+        getDataWithPost(LOGIN, user)
             .then(result => {
                 const accessToken = result.accessToken.split("Bearer ")[1];
                 const refreshToken = result.refreshToken;
@@ -68,9 +68,9 @@ export function authLoginAction(form) {
                     setCookie("accessToken", accessToken);
                     localStorage.setItem("refreshToken", refreshToken);
                 }
-
                 dispatch({ type: AUTH_LOGIN_SUCCESS, user: result.user });
             })
+
             .catch(err => {
                 dispatch({ type: AUTH_LOGIN_ERROR, message: err.message });
             });
@@ -95,44 +95,44 @@ export function authLogoutAction() {
 
 
 export function recoverPWAction(email) {
-    return function(dispatch) {
-        dispatch({type: AUTH_FORGOT_PASSWORD_START});
-		getDataWithPost(FORGOT_PASSWORD, {'email':  email})
-       		.then(result => {
+    return function (dispatch) {
+        dispatch({ type: AUTH_FORGOT_PASSWORD_START });
+        getDataWithPost(FORGOT_PASSWORD, { 'email': email })
+            .then(result => {
                 console.log(result);
-               	dispatch({
-					type:  AUTH_FORGOT_PASSWORD_SUCCESS,
-					answer: result.success
-				});
-			})
-			.catch(e => {
-				dispatch({
+                dispatch({
+                    type: AUTH_FORGOT_PASSWORD_SUCCESS,
+                    answer: result.success
+                });
+            })
+            .catch(e => {
+                dispatch({
                     type: AUTH_FORGOT_PASSWORD_ERROR
                 });
-			});
-		
-		
-	}
+            });
+
+
+    }
 }
 
 export function resetPWAction(data) {
-    return function(dispatch) {
-        dispatch({type: AUTH_RESET_PASSWORD_START});
-        getDataWithPost(RESET_PASSWORD, {data})
-       		.then(result => {
-               	dispatch({
-					type:  AUTH_RESET_PASSWORD_SUCCESS,
-					answer: result.success
-				});
-			})
-			.catch(e => {
-				dispatch({
+    return function (dispatch) {
+        dispatch({ type: AUTH_RESET_PASSWORD_START });
+        getDataWithPost(RESET_PASSWORD, { data })
+            .then(result => {
+                dispatch({
+                    type: AUTH_RESET_PASSWORD_SUCCESS,
+                    answer: result.success
+                });
+            })
+            .catch(e => {
+                dispatch({
                     type: AUTH_RESET_PASSWORD_ERROR
                 });
-			});
-		
-		
-	}
+            });
+
+
+    }
 }
 
 export function authGetUserAction() {
