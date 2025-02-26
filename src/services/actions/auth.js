@@ -60,7 +60,7 @@ export function authRegisterAction(form) {
 export function authLoginAction(user) {
     return function (dispatch) {
         dispatch({ type: AUTH_LOGIN_START });
-        getDataWithPost(LOGIN, user)
+       getDataWithPost(LOGIN, user)
             .then(result => {
                 const accessToken = result.accessToken.split("Bearer ")[1];
                 const refreshToken = result.refreshToken;

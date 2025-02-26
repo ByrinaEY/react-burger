@@ -32,12 +32,12 @@ import {
 
 const initialState = {
     requestStart: false,
-    requestError: false,
+    requestError:false,
     requestSuccess: false,
-    userLoggedIn: false,
+    userLoggedIn:false,
     user: {
-        name: "",
-        email: ""
+        name: null,
+        email: null
     },
     forgotPassword: false
 };
@@ -52,11 +52,11 @@ export function authReducer(state = initialState, action) {
             return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, userLoggedIn: false };
 
         case AUTH_LOGIN_START:
-            return { ...state, requestStart: true, requestError: null, requestSuccess: false };
+            return { ...state, requestStart: true, requestError: null, requestSuccess: false, user: initialState.user };
         case AUTH_LOGIN_SUCCESS:
-            return { ...state, requestStart: false, requestError: null, requestSuccess: true, userLoggedIn: true };
+            return { ...state, requestStart: false, requestError: null, requestSuccess: true, userLoggedIn: true, user: { name: action.user.name, email: action.user.email } };
         case AUTH_LOGIN_ERROR:
-            return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, userLoggedIn: false };
+            return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, userLoggedIn: false, user: initialState.user };
 
         case AUTH_LOGOUT_START:
             return { ...state, requestStart: true, requestError: null, requestSuccess: false };

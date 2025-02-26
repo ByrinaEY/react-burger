@@ -1,6 +1,6 @@
 import {URL} from './server';
  import request from './check-response';
- import {getCookie } from "./cookie";
+
 
 
 

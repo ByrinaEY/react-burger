@@ -1,15 +1,12 @@
 import {EmailInput, PasswordInput, Button  } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 import styles from './login.module.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {auth } from '../../services/selectors';
+import { Link} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { authLoginAction} from '../../services/actions/auth';
 
 
 export  function Login (){
-    const { userLoggedIn } = useSelector(auth);
-
     const [user, setValue] = useState({email:"",password:""  });
    
     const onChange = e => {
@@ -20,25 +17,14 @@ export  function Login (){
         else {setValue({ ...user, password: e.target.value})}
         };
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    // const navigate = useNavigate();
     
-    let login= useCallback(
-        e => {
-           e.preventDefault();
-           dispatch(authLoginAction(user));
-                       
-        },
-        [authLoginAction, user]
-      );
-     
+    let login= () => {
+        dispatch(authLoginAction(user));
+        // navigate("/", { replace: true });
+    }
     
-        if (userLoggedIn) {
-            alert("Вы успешно вошли в систему!") ;
-            navigate("/", { replace: true });
-        } 
-       
     
     return(
         <div className = {"container"}>
