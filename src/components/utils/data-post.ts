@@ -3,7 +3,7 @@ import {URL} from './server';
 
 
 
-export default  function getDataWithPost(endPoint, data){
+export default  function getDataWithPost(endPoint:string, data: any){
     return request(`${URL}${endPoint}`, {
         method: 'POST',
         headers: {

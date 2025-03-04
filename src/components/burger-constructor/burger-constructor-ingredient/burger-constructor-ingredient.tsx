@@ -1,11 +1,17 @@
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor-ingredient.module.css';
-import {useRef} from 'react';
+import {useRef, FC} from 'react';
 import { useDrop, useDrag } from "react-dnd";
 import {SWAP_INGREDIENT} from '../../../services/actions/burger-constructor.js'
 import { useDispatch} from 'react-redux';
+import { TIngredientConstructor } from '../../utils/data-prop-types';
 
-export default function BurgerConstructorIngredient({ item, index, onDelete }) {
+type TProps ={
+    item: TIngredientConstructor;
+    index: number;
+    onDelete: (index: number) => void;
+}
+ const BurgerConstructorIngredient : FC <TProps> = ({ item, index, onDelete }) => {
     const dispatch = useDispatch();
     const ref = useRef(null);
 
@@ -14,7 +20,7 @@ export default function BurgerConstructorIngredient({ item, index, onDelete }) {
         item: {index}
     });
 
-    const [, drop] = useDrop({
+    const [, drop] = useDrop <TIngredientConstructor>({
         accept: "sort",
         drop(item) {
             if (index !== item.index) {
@@ -27,7 +33,7 @@ export default function BurgerConstructorIngredient({ item, index, onDelete }) {
 
     return (
         <div>
-            <li key={item.key} className={`${styles.ingredient} mt-4`} ref={ref}>
+            <li key={item.id} className={`${styles.ingredient} mt-4`} ref={ref}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                     text={item.name}
@@ -40,3 +46,5 @@ export default function BurgerConstructorIngredient({ item, index, onDelete }) {
         </div>
     )
 }
+
+export default BurgerConstructorIngredient;

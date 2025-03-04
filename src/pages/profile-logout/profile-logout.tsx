@@ -13,7 +13,7 @@ export function ProfileLogout() {
 
     useEffect(() => {
         if (userLoggedIn) {
-            dispatch(authLogoutAction());
+            dispatch(authLogoutAction() as any);
             setStarted(true);
         }
     }, [userLoggedIn, dispatch]);
@@ -24,11 +24,12 @@ export function ProfileLogout() {
         if (started && requestError) {
             dispatch({ type: AUTH_CLEAR_ERRORS });
             setStarted(false);
-            return (
-                <div >
-                    <p >{`[Выход] ${requestError}`}</p>
-                </div>
-            );
+            // return (
+            //     <div >
+            //         <p >{`[Выход] ${requestError}`}</p>
+            //     </div>
+            // );
+            alert(`[Выход] ${requestError}`);
 
         } else if (started && requestSuccess) {
             navigate("/login", { replace: true });

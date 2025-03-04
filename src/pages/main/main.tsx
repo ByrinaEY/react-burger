@@ -1,6 +1,6 @@
 //import {data} from '../utils/data.js';
-import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients.jsx';
-import BurgerConstructor from '../../components/burger-constructor/burger-constructor.jsx';
+import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients.js';
+import BurgerConstructor from '../../components/burger-constructor/burger-constructor.js';
 import styles from './main.module.css';
 import React, { useEffect, useState } from 'react';
 
@@ -15,7 +15,7 @@ import { loadIngredients } from '../../services/selectors.js';
     const dispatch = useDispatch();
 -
 
-    useEffect(() => { dispatch(loadIngredientsAction()); }, [dispatch]);
+    useEffect(() => { dispatch(loadIngredientsAction() as any); }, [dispatch]);
     return (
         <main className={styles.main}>
             {(isLoading || hasError) ?

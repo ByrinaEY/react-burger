@@ -1,5 +1,5 @@
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import styles from './forgot-password.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../services/selectors';
@@ -12,14 +12,14 @@ export function ForgotPassword() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { requestStart, requestError, requestSuccess } = useSelector(auth);
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setState(e.target.value)
     }
 
 
     function recoverPassword() {
         if (email != '') {
-            dispatch(recoverPWAction(email));
+            dispatch(recoverPWAction(email) as any);
         }
     }
 

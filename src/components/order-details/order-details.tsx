@@ -1,10 +1,10 @@
-import styles from './order-details.module.css';
 import img from '../../images/done.png';
 import PropTypes from 'prop-types';
 import { getOrderDetails } from '../../services/selectors.js'
 import { useSelector } from 'react-redux';
+import {FC } from 'react';
 
-function OrderDetails() {
+const OrderDetails: FC = () =>{
     const { orderNumber, isLoading, hasError } = useSelector(getOrderDetails);  
     return (
         <div>

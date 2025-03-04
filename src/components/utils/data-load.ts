@@ -4,7 +4,7 @@ import {URL} from './server';
 
 
 
- export default function getDataFromServer(endPoint){
+ export default function getDataFromServer(endPoint: string){
     return request(`${URL}${endPoint}`)
    
 };

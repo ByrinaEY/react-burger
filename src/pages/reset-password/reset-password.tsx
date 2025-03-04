@@ -1,5 +1,5 @@
 import { PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import styles from './reset-password.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import { AUTH_CLEAR_ERRORS } from '../../services/actions/auth'
 
 export function ResetPassword() {
     const [state, setState] = useState({ password: "", token: "" })
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'token') {
             setState({ ...state, token: e.target.value });
         } else {
@@ -22,7 +22,7 @@ export function ResetPassword() {
     const { requestStart, requestError, requestSuccess, userLoggedIn } = useSelector(auth);
 
     function resetPassword() {
-        dispatch(resetPWAction(state));
+        dispatch(resetPWAction(state) as any);
     }
 
     useEffect(() => {
@@ -31,16 +31,17 @@ export function ResetPassword() {
              navigate("/forgot-password", { replace: true });}
         
     }, [requestSuccess, navigate]);
+
     return (
         <div className={styles.registration}>
-            {(requestStart || requestError) ?
-                (<p> {requestStart ? 'Загрузка...' : requestError ? 'Произошла ошибка' : undefined}</p>) :
-                requestSuccess ? alert('Пароль сброшен') :
+              {/* {(requestStart || requestError) ?
+                (<p> {requestStart ? 'Загрузка...' : requestError ? 'Произошла ошибка' : " "}</p>) :
+                requestSuccess ? alert('Пароль сброшен') :   */}
 
                     (<div className={styles.main}>
                         <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
                         <PasswordInput placeholder={"Введите новый пароль"} name={'password'} extraClass="mb-6" value={state.password} onChange={onChange} />
-                        <Input placeholder="Введите код из письма" extraClass="mb-6" name="token" value={state.token} onChange={onChange} />
+                        <Input placeholder="Введите код из письма" extraClass="mb-6" name="token" value={state.token} onChange={onChange} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}  />
                         <Button htmlType="button" type="primary" size="medium" extraClass="mb-20" onClick={resetPassword}>Сохранить</Button>
                         <div className={styles.bottom}>
                             <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>
@@ -49,7 +50,8 @@ export function ResetPassword() {
                             </Link>
                         </div>
 
-                    </div>)}
+                    </div>)
+                     {/* }  */}
         </div>
     )
 }

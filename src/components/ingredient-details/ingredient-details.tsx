@@ -1,11 +1,12 @@
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
-import { dataPropTypes } from '../utils/data-prop-types';
-import {useSelector } from 'react-redux';
-import {getDataOfIngredient} from '../../services/selectors'
+import { TIngredient } from '../utils/data-prop-types';
+import { FC } from 'react';
 
+type TProps={
+    ingredient: TIngredient; 
+}
 
-function IngredientDetails({ingredient}) {
+const IngredientDetails: FC<TProps> = ({ingredient}) => {
       
     return (
         <div>
@@ -35,7 +36,5 @@ function IngredientDetails({ingredient}) {
 
 };
 
-IngredientDetails.propTypes = {
-    ingredient: dataPropTypes.isRequired}; 
 
 export default IngredientDetails;

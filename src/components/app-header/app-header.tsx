@@ -3,10 +3,11 @@ import IconLink from '../icon-link/icon-link';
 import styles from './app-header.module.css';
 import {useSelector} from 'react-redux';
 import {auth } from '../../services/selectors';
+import { FC } from 'react';
 
 
 
-function AppHeader() {
+const AppHeader: FC = () => {
     const { userLoggedIn } = useSelector(auth);
     
     return (

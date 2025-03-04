@@ -1,5 +1,5 @@
 import {EmailInput, PasswordInput, Button  } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useState} from 'react';
+import {useState, ChangeEvent} from 'react';
 import styles from './login.module.css';
 import { Link} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { authLoginAction} from '../../services/actions/auth';
 export  function Login (){
     const [user, setValue] = useState({email:"",password:""  });
    
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
        
         if (e.target.name === 'email') {
             setValue({ ...user, email: e.target.value });
@@ -21,7 +21,7 @@ export  function Login (){
     // const navigate = useNavigate();
     
     let login= () => {
-        dispatch(authLoginAction(user));
+        dispatch(authLoginAction(user) as any);
         // navigate("/", { replace: true });
     }
     

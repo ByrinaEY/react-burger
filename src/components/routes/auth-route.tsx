@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router';
 import { auth } from '../../services/selectors';
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+type TProps={
+  onlyUnAuth: boolean;
+  component: React.ReactNode;
+}
+const Protected : FC <TProps>= ({ onlyUnAuth = false, component }) => {
   
   const {requestStart, userLoggedIn, user} = useSelector(auth);
   const location = useLocation();
@@ -29,7 +33,7 @@ const Protected = ({ onlyUnAuth = false, component }) => {
 
 
 export const OnlyAuth = Protected;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth : FC <TProps>= ({ component }) => (
   <Protected onlyUnAuth={true} component={component} />
 );
 

@@ -3,9 +3,12 @@ import {URL, API_USER} from './server';
  import {getCookie } from "./cookie";
 
 
+ export type TLoginUser = {
+    email: string;
+    password: string;
+};
 
-
-export  function getUser(endPoint){
+export  function getUser(endPoint: string){
     return requestRefresh(`${URL}${endPoint}`, {
         method: "GET",
         headers: {
@@ -15,7 +18,7 @@ export  function getUser(endPoint){
     });
 }
 
-export function patchUser(user) {
+export function patchUser(user : TLoginUser) {
     return requestRefresh(`${URL}${API_USER}`, {
         method: "PATCH",
         headers: {

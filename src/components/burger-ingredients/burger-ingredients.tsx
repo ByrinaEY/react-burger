@@ -1,27 +1,25 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, FC } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsCard from './burger-ingredients-card/burger-ingredients-card';
-import PropTypes from 'prop-types';
-import { dataPropTypes } from '../utils/data-prop-types';
+import { TIngredient } from '../utils/data-prop-types';
 import { useSelector } from 'react-redux';
 import { loadIngredients } from '../../services/selectors';
 
 
-function BurgerIngredients() {
+const BurgerIngredients : FC = () => {
     const { ingredients } = useSelector(loadIngredients);
     const [current, setCurrent] = React.useState('bun');
-    const primaryRef = useRef(null);
-    const bunRef = useRef(null);
-    const sauceRef = useRef(null);
-    const toppingsRef = useRef(null);
-    const listBun = ingredients.filter((item) => item.type === 'bun');
-    const listMain = ingredients.filter((item) => item.type === 'main');
-    const listSauce = ingredients.filter((item) => item.type === 'sauce');
+    const primaryRef = useRef<any>(null);
+    const bunRef = useRef<any>(null);
+    const sauceRef = useRef<any>(null);
+    const toppingsRef = useRef<any>(null);
+    const listBun = ingredients.filter((item: TIngredient) => item.type === 'bun');
+    const listMain = ingredients.filter((item: TIngredient) => item.type === 'main');
+    const listSauce = ingredients.filter((item: TIngredient) => item.type === 'sauce');
 
-    const setTab = (tab) => {
-        console.log(tab);
+    const setTab = (tab: string) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
         console.log(document.getElementById(tab));
@@ -34,12 +32,13 @@ function BurgerIngredients() {
         const mainDistance = Math.abs(primaryRef.current.getBoundingClientRect().top - toppingsRef.current.getBoundingClientRect().top);
         const minDistance = Math.min(bunDistance, sauceDistance, mainDistance);
         const currentHeader = minDistance === bunDistance ? 'bun' : minDistance === sauceDistance ? 'sauce' : 'main';
-        setCurrent(prevState => (currentHeader === prevState.current ? prevState.current : currentHeader))
+       // setCurrent(prevState => (currentHeader === prevState.current? prevState.current : currentHeader))
+        setCurrent(prevState => (currentHeader === prevState? prevState : currentHeader))
 
     }
-
+   
     useEffect(() => {
-        document.querySelector(`#${current}`).scrollIntoView();
+        document.querySelector(`#${current}`)?.scrollIntoView();
     }, [current])
 
     return (
@@ -72,10 +71,6 @@ function BurgerIngredients() {
     )
 
 
-}
-
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(dataPropTypes.isRequired)
 }
 
 export default BurgerIngredients;

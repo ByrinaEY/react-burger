@@ -2,7 +2,7 @@ import {URL} from './server';
  import request from './check-response';
 
 
-export default function logoutUser(endPoint) {
+export default function logoutUser(endPoint: string) {
     return request(`${URL}${endPoint}`, {
         method: "POST",
         headers: {

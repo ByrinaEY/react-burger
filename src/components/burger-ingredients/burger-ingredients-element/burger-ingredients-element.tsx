@@ -1,25 +1,25 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients-element.module.css';
-import propTypes from 'prop-types';
-import { dataPropTypes } from '../../utils/data-prop-types.js';
+import { TIngredient } from '../../utils/data-prop-types.js';
 import { useState } from 'react';
 import Modal from '../../modal/modal.jsx';
 import IngredientDetails from '../../ingredient-details/ingredient-details.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { SET_DISPLAYES_INGREDIENT } from '../../../services/actions/ingredients-details.js';
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import {  getIngredientsFromConstructor } from '../../../services/selectors.js';
 import { useMemo } from 'react';
-import {useNavigate, useLocation } from 'react-router-dom';
-import React, { useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import  { useEffect, FC} from 'react';
 
+type TProps={
+    dataItem: TIngredient;
+}
 
-function BurgerIngredientElement({ dataItem }) {
+const BurgerIngredientElement : FC <TProps> =({ dataItem }) =>{
     const { ingredients, bun } = useSelector( getIngredientsFromConstructor);
     const navigate = useNavigate();
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const location = useLocation();
-        
+            
     function showModalWindow() {
       setIsOpenModal(true);
          
@@ -41,7 +41,7 @@ function BurgerIngredientElement({ dataItem }) {
         if (bun && bun._id === dataItem._id){
         return 2;
         } else {
-        return ingredients.filter(item => item._id === dataItem._id).length;}
+        return ingredients.filter((item: TIngredient)  => item._id === dataItem._id).length;}
     }, [bun, ingredients]);
    
    
@@ -73,10 +73,6 @@ function BurgerIngredientElement({ dataItem }) {
 
     )
 }
-
-BurgerIngredientElement.propTypes = {
-    dataItem: dataPropTypes.isRequired
-};
 
 export default BurgerIngredientElement;
 

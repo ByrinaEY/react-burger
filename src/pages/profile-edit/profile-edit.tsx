@@ -1,5 +1,5 @@
 import { Input, EmailInput, PasswordInput , Button} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FormEvent } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {auth } from '../../services/selectors';
 import { useNavigate } from 'react-router-dom';
@@ -7,14 +7,20 @@ import {useForm} from '../../components/hook/useForm';
 import {authPatchUserAction, AUTH_CLEAR_ERRORS} from '../../services/actions/auth';
 import styles from './profile-edit.module.css';
 
-
+type TState= {
+    name: string;
+    email: string;
+    password: string;
+    wasSubmit?: boolean;
+   
+}
 export  function ProfileEdit(){
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const submitCb = useCallback((state) => {
-        dispatch(authPatchUserAction(state));
+    const submitCb = useCallback((state: TState) => {
+        dispatch(authPatchUserAction(state) as any);
     }, [dispatch]);
 
     const { requestStart, requestError, requestSuccess, user } = useSelector(auth);
@@ -27,7 +33,7 @@ export  function ProfileEdit(){
 
     const valueChange = (user.name !== "" && (state.name !== user.name || state.email !== user.email || state.password.length > 0));
 
-       const onReset = useCallback((e) => {
+       const onReset = useCallback((e: FormEvent) => {
         e.preventDefault();
         setState({ name: user.name, email: user.email, password: "" });
     }, [setState, user]);
@@ -44,12 +50,11 @@ export  function ProfileEdit(){
  
 return(
      <form className={styles.registration}  onSubmit={onSubmit} onReset={onReset}>
-    <Input placeholder="Имя" extraClass="mb-6" name="name" value={state.name} onChange={onChange} icon={'EditIcon'} />
-    <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email}  onChange={onChange} icon={'EditIcon'} />
+    <Input placeholder="Имя" extraClass="mb-6" name="name" value={state.name} onChange={onChange} icon={'EditIcon'} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}  />
+    <EmailInput name={'email'} isIcon={false} extraClass="mb-6" value={state.email}  onChange={onChange} />
     <PasswordInput name={'password'} extraClass="mb-6" value={state.password} onChange={onChange} icon={'EditIcon'} />
     {requestStart ? <p >loading</p> : valueChange ? (<div>
                 <Button type="primary" htmlType='reset'>Отмена</Button>
-                <Button type="primary" extraClass="ml-5" htmlType='submit'>Сохранить</Button>
             </div>) : undefined}
     </form>
 )

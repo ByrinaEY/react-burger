@@ -1,21 +1,20 @@
-import React, { useEffect, useState, useCallback} from 'react';
-import { ConstructorElement, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import { useEffect, useState, useCallback, FC } from 'react';
+import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
-import { dataPropTypes } from '../utils/data-prop-types.js';
+import { TIngredientConstructor } from '../utils/data-prop-types';
 import Modal from '../modal/modal.jsx';
-import OrderDetails from '../order-details/order-details.jsx';
+import OrderDetails from '../order-details/order-details.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFromConstructor } from '../../services/selectors.js';
-import { useDrop} from "react-dnd";
-import { SET_BUN, SET_TOTAL, DELETE_INGREDIENT} from '../../services/actions/burger-constructor.js'
-import {createOrderAction} from '../../services/actions/create-order.js';
-import {createUniqKeyForIngredientAction} from '../../services/actions/burger-constructor.js'
+import { useDrop } from "react-dnd";
+import { SET_BUN, SET_TOTAL, DELETE_INGREDIENT } from '../../services/actions/burger-constructor.js'
+import { createOrderAction } from '../../services/actions/create-order.js';
+import { createUniqKeyForIngredientAction } from '../../services/actions/burger-constructor.js'
 import BurgerConstructorIngredient from './burger-constructor-ingredient/burger-constructor-ingredient.jsx';
 import { useNavigate } from 'react-router';
-import {auth} from '../../services/selectors.js';
+import { auth } from '../../services/selectors.js';
 
-function BurgerConstructor() {
+const BurgerConstructor: FC = () => {
     const { ingredients, bun, total } = useSelector(getIngredientsFromConstructor);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,7 +34,7 @@ function BurgerConstructor() {
         if (bun) {
             sum = sum + bun.price * 2;
         }
-        sum = sum + ingredients.reduce((sum, item) => sum + item.price, 0);
+        sum = sum + ingredients.reduce((sum: number, item: TIngredientConstructor) => sum + item.price, 0);
         dispatch({ type: SET_TOTAL, sum });
     }, [bun, ingredients, dispatch]
     );
@@ -44,7 +43,7 @@ function BurgerConstructor() {
     const [, dropTargetIngredient] = useDrop({
         accept: ["sauce", "main"],
         drop(item) {
-           dispatch(createUniqKeyForIngredientAction(item));
+            dispatch(createUniqKeyForIngredientAction(item) as any);
         },
     });
 
@@ -62,29 +61,30 @@ function BurgerConstructor() {
         },
     });
 
-    function deleteIngredient(index) {
+    function deleteIngredient(index: number) {
         dispatch({ type: DELETE_INGREDIENT, index: index })
     };
-    
- const createOrder= useCallback(() => {
-    if (requestStart) {
-        return;
-    }
-    if (!userLoggedIn) {
-        navigate("/login", { replace: true });
-    } else {
 
-    let orderIngredients=[];
-    for(let item of ingredients){
-        orderIngredients.push(item._id);
+    const createOrder = useCallback(() => {
+        if (requestStart) {
+            return;
         }
-    if (bun) {
-        orderIngredients.push(bun._id, bun._id);
-    }
-    dispatch(createOrderAction(orderIngredients));}
-       showModalWindow();
+        if (!userLoggedIn) {
+            navigate("/login", { replace: true });
+        } else {
+
+            let orderIngredients = [];
+            for (let item of ingredients) {
+                orderIngredients.push(item._id);
+            }
+            if (bun) {
+                orderIngredients.push(bun._id, bun._id);
+            }
+            dispatch(createOrderAction(orderIngredients) as any);
+        }
+        showModalWindow();
     }, [requestStart, userLoggedIn, navigate, ingredients, bun, dispatch]);
-    
+
 
     return (
         <section className={styles.section}>
@@ -96,7 +96,7 @@ function BurgerConstructor() {
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
-                       
+
                     />)
                         : (<div className={`${styles["empty-element"]} constructor-element constructor-element_pos_top ml-8`}>
                             <div className={`${styles["empty-element-text"]} text text_type_main-default`}>Перетащите булочку</div>
@@ -104,9 +104,9 @@ function BurgerConstructor() {
                 </div>
 
                 <ul className={styles.scroll} ref={dropTargetIngredient} >
-                    {ingredients && ingredients.length > 0 ? ingredients.map((item, index) => (
-                    <BurgerConstructorIngredient key={item.key} item={item} index={index} onDelete={deleteIngredient}  />   
-                    
+                    {ingredients && ingredients.length > 0 ? ingredients.map((item: TIngredientConstructor, index: number) => (
+                        <BurgerConstructorIngredient key={item.key} item={item} index={index} onDelete={deleteIngredient} />
+
                     )) :
                         (<div className={`${styles["empty-element"]} constructor-element constructor-element ml-8`}>
                             <div className={`${styles["empty-element-text"]} text text_type_main-default`}>Перетащите ингредиенты</div>
@@ -135,16 +135,12 @@ function BurgerConstructor() {
             </div>
             {isOpenModal && (
                 <Modal title={''} onClose={closeModalWindow}>
-                    <OrderDetails/>
+                    <OrderDetails />
                 </Modal>
             )}
         </section>
 
     )
 }
-
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(dataPropTypes.isRequired)
-};
 
 export default BurgerConstructor;

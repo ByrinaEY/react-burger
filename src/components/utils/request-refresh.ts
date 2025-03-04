@@ -2,7 +2,7 @@
 import {setCookie } from "./cookie";
 
 
-export default async function requestRefresh(url, options) {
+export default async function requestRefresh(url: string, options: any) {
     try {
         const res = await fetch(url, options);
         return checkResponse(res);
@@ -23,6 +23,6 @@ export default async function requestRefresh(url, options) {
     }
 }
 
-function checkResponse(res) {
+function checkResponse(res: Response) {
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
