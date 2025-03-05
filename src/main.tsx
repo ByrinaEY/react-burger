@@ -11,12 +11,12 @@ import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-      <BrowserRouter>
-    <Provider store={store}>
-    <DndProvider backend={HTML5Backend}>
-    <App />
-    </DndProvider>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <DndProvider backend={HTML5Backend}>
+          <App />
+        </DndProvider>
+      </Provider>
     </BrowserRouter>
   </StrictMode>,
 )

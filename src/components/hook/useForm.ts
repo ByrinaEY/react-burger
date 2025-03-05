@@ -22,3 +22,5 @@ export function useForm <T extends {wasSubmit?: boolean}>(initialState: T, submi
 
     return { state, setState, onSubmit, onChange };
 }
+
+

@@ -1,21 +1,14 @@
-//import {data} from '../utils/data.js';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients.js';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor.js';
 import styles from './main.module.css';
-import React, { useEffect, useState } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { loadIngredientsAction } from '../../services/actions/burger-ingredients.js';
+import { useSelector } from 'react-redux';
 import { loadIngredients } from '../../services/selectors.js';
 
 
  function MainPage() {
 
     const { isLoading, hasError, ingredients } = useSelector(loadIngredients);
-    const dispatch = useDispatch();
--
-
-    useEffect(() => { dispatch(loadIngredientsAction() as any); }, [dispatch]);
+    
     return (
         <main className={styles.main}>
             {(isLoading || hasError) ?

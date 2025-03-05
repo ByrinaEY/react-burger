@@ -1,12 +1,25 @@
 import styles from './ingredient-details.module.css';
 import { TIngredient } from '../utils/data-prop-types';
 import { FC } from 'react';
+import {useSelector } from 'react-redux';
+import { loadIngredients } from '../../services/selectors.js';
 
 type TProps={
-    ingredient: TIngredient; 
+    id: string; 
 }
 
-const IngredientDetails: FC<TProps> = ({ingredient}) => {
+const IngredientDetails: FC<TProps> = ({id}) => {
+
+    const { ingredients } = useSelector(loadIngredients);
+      
+    let ingredient;
+
+   if (ingredients){
+    ingredient = ingredients.find((el: TIngredient) => el._id === id);  }
+       
+    if (!ingredient) {
+             return <p>'Загружаю ингредиент....'</p>
+         } else {
       
     return (
         <div>
@@ -33,7 +46,7 @@ const IngredientDetails: FC<TProps> = ({ingredient}) => {
         </div>
     );
 
-
+         }
 };
 
 
