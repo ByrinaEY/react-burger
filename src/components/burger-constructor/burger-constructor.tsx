@@ -21,6 +21,7 @@ import { createUniqKeyForIngredientAction } from "../../services/actions/burger-
 import BurgerConstructorIngredient from "./burger-constructor-ingredient/burger-constructor-ingredient.jsx";
 import { useNavigate } from "react-router";
 import { auth } from "../../services/selectors.js";
+import {TIngredient} from "../utils/type";
 
 const BurgerConstructor: FC = () => {
   const { ingredients, bun, total } = useSelector(
@@ -56,7 +57,7 @@ const BurgerConstructor: FC = () => {
   //перенос компонентов
   const [, dropTargetIngredient] = useDrop({
     accept: ["sauce", "main"],
-    drop(item) {
+    drop(item: TIngredient) {
       dispatch(createUniqKeyForIngredientAction(item) as any);
     },
   });

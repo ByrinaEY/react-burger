@@ -25,7 +25,7 @@ const AppHeader: FC = () => {
               </IconLink>
             </li>
             <li>
-              <IconLink href={"/lenta"} iconName={ListIcon}>
+              <IconLink href={"/feed"} iconName={ListIcon}>
                 Лента заказов
               </IconLink>
             </li>

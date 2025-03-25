@@ -27,22 +27,36 @@ import {
     AUTH_PATCH_USER_SUCCESS,
     AUTH_PATCH_USER_ERROR,
 
-    AUTH_CLEAR_ERRORS
+    AUTH_CLEAR_ERRORS,
+
+    AUTH_TOKEN_START,
+    AUTH_TOKEN_SUCCESS,
+    AUTH_TOKEN_ERROR,
+
+    TAuthActions,
 } from '../actions/auth';
 
-const initialState = {
+import {TUser} from "../../components/utils/type";
+
+type TAuthState = {
+    requestStart: boolean;
+    requestError:  string | null;
+    requestSuccess: boolean;
+    userLoggedIn: boolean;
+    user: TUser | null;
+    forgotPassword: boolean;
+}
+
+const initialState: TAuthState= {
     requestStart: false,
-    requestError:false,
+    requestError: null,
     requestSuccess: false,
     userLoggedIn:false,
-    user: {
-        name: null,
-        email: null
-    },
+    user: null,
     forgotPassword: false
 };
 
-export function authReducer(state = initialState, action) {
+export function authReducer(state = initialState, action: TAuthActions): TAuthState {
     switch (action.type) {
         case AUTH_REGISTER_START:
             return { ...state, requestStart: true, requestError: null, requestSuccess: false };
@@ -66,16 +80,16 @@ export function authReducer(state = initialState, action) {
             return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, userLoggedIn: false };
 
         case AUTH_FORGOT_PASSWORD_START:
-            return { ...state, requestStart: true, requestError: false, requestSuccess: false, forgotPassword: false };
+            return { ...state, requestStart: true, requestError: null, requestSuccess: false, forgotPassword: false };
         case AUTH_FORGOT_PASSWORD_SUCCESS:
-            return { ...state, requestStart: false, requestError: false, requestSuccess: true, forgotPassword: true };
+            return { ...state, requestStart: false, requestError: null, requestSuccess: true, forgotPassword: true };
         case AUTH_FORGOT_PASSWORD_ERROR:
             return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, forgotPassword: false };
 
         case AUTH_RESET_PASSWORD_START:
-            return { ...state, requestStart: true, requestError: false, requestSuccess: false };
+            return { ...state, requestStart: true, requestError: null, requestSuccess: false };
         case AUTH_RESET_PASSWORD_SUCCESS:
-            return { ...state, requestStart: false, requestError: false, requestSuccess: true };
+            return { ...state, requestStart: false, requestError: null, requestSuccess: true };
         case AUTH_RESET_PASSWORD_ERROR:
             return { ...state, requestStart: false, requestError: action.message, requestSuccess: false };
 
@@ -94,7 +108,14 @@ export function authReducer(state = initialState, action) {
             return { ...state, requestStart: false, requestError: action.message, requestSuccess: false };
 
         case AUTH_CLEAR_ERRORS:
-            return { ...state, requestStart: false, requestError: false, requestSuccess: false };
+            return { ...state, requestStart: false, requestError: null, requestSuccess: false };
+
+        case AUTH_TOKEN_START:
+            return { ...state, requestStart: true, requestError: null, requestSuccess: false };
+        case AUTH_TOKEN_SUCCESS:
+            return { ...state, requestStart: false, requestError: null, requestSuccess: true, userLoggedIn: true, user: action.user };
+        case AUTH_TOKEN_ERROR:
+            return { ...state, requestStart: false, requestError: action.message, requestSuccess: false, userLoggedIn: false, user: null };
 
         default:
             return state;

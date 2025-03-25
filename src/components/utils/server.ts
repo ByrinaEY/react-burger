@@ -14,8 +14,10 @@ export const REGISTER = "auth/register";
 
 export const LOGOUT = "auth/logout";
 
-export const TOKEN = "auth/token";
+export const API_TOKEN = "auth/token";
 
 export const API_USER = "auth/user";
+
+export const WS_URL = "wss://norma.nomoreparties.space";
 
 

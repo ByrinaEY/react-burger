@@ -17,12 +17,12 @@ const Protected : FC <TProps>= ({ onlyUnAuth = false, component }) => {
     return <p>Загрузка </p>;
   }
  
-  if (onlyUnAuth && user.name ) {
+  if (onlyUnAuth && user ) {
     const { from } = location.state || { from: { pathname: "/" } };
     return <Navigate to={from} />;
   }
 
-  if (!onlyUnAuth && !user.name) {
+  if (!onlyUnAuth && !user) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

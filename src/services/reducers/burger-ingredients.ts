@@ -1,6 +1,16 @@
 import {LOAD_INGREDIENTS_START, 
     LOAD_INGREDIENTS_SUCCESS, 
-    LOAD_INGREDIENTS_ERROR} from '../actions/burger-ingredients.js';
+    LOAD_INGREDIENTS_ERROR,
+TLoadIngredientsActions} from '../actions/burger-ingredients.js';
+
+    import {TIngredient} from "../../components/utils/type";
+
+
+    export type TBurgerIngredientsState = {
+        isLoading: boolean, 
+        hasError: boolean, 
+        ingredients: Array<TIngredient> | null
+    }
 
 const initialState = {
     isLoading: false, 
@@ -8,7 +18,7 @@ const initialState = {
     ingredients: null
 }
 
-export function loadIngredientsReducer (state = initialState, action){
+export function loadIngredientsReducer (state = initialState, action: TLoadIngredientsActions){
  switch(action.type){
     case LOAD_INGREDIENTS_START:
         return {...state, hasError: false, isLoading: true};
