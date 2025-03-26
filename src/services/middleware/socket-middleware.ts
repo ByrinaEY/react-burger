@@ -58,7 +58,15 @@ export const socketMiddleware = (wsActions: wsActionsTypes): Middleware => {
           const parsedData = JSON.parse(data);
           if (!parsedData?.success) {
             if (parsedData?.message === 'Invalid or missing token') {
-              refreshToken();
+              refreshToken()
+              .then(result  =>{
+                const wssUrl = new URL(url);
+                wssUrl.searchParams.set("token", result.accessToken.replace("Bearer ",""));
+                dispatch({ type: wsActions.onStart, url: url });
+              })
+              .catch((err:any): void =>{
+                dispatch({ type: wsActions.onError, error: err });
+              })
             }
             dispatch({ type: wsActions.onError, error: parsedData?.message });
           } else {
