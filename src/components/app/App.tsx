@@ -21,6 +21,7 @@ import Modal from "../modal/modal.jsx";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useNavigate } from "react-router-dom";
 import OrderPage from '../order-page/order-page';
+import OrderInfo from '../order-info/order-info';
 
 function App() {
   const location = useLocation();
@@ -81,6 +82,7 @@ function App() {
 
       {background && (
         <Routes>
+           
           <Route
             path="/ingredients/:ingredientId"
             element={
@@ -89,8 +91,16 @@ function App() {
               </Modal>
             }
           />
+           <Route
+          path="/feed/:id"
+          element={
+            <Modal title={""} onClose={closeModalWindow}>
+              <OrderInfo/>
+            </Modal>
+          }
+        />
         </Routes>
-      )}
+      )}  
     </>
   );
 }

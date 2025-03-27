@@ -20,9 +20,8 @@ function OrderList() {
   }, [dispatch]);
   return (
     <div className={styles.main}>
-       {!connected && <p className={`mb-2 error-text text text_type_main-default`}>loading</p>}
-            {!!error && <p className={`mb-2 error-text text text_type_main-default`}>{error}</p>}
-            {connected && !!message && (
+            {!error && <p className={`mb-2 error-text text text_type_main-default`}>{error}</p>}
+            { !!message && (
               
       <div className={styles.div}>
         <Orders data={message} />

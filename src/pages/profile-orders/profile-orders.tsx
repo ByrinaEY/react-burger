@@ -9,7 +9,7 @@ import { TOrdersList } from '../../components/utils/type';
 
 function ProfileOrders() {
     const dispatch = useDispatch();
-    const { connected, error, message } = useSelector(getOrdersUser);
+    const { error, message } = useSelector(getOrdersUser);
 
     const messageSorted: TOrdersList | null = useMemo(() => {
         if (!message) {
@@ -28,9 +28,9 @@ function ProfileOrders() {
 
     return (
         <div className={styles.container}>
-            {!connected && <p className={`mb-2 error-text text text_type_main-default`}>loading</p>}
+            {/* {!connected && <p className={`mb-2 error-text text text_type_main-default`}>loading</p>} */}
             {!!error && <p className={`mb-2 error-text text text_type_main-default`}>{error}</p>}
-            {connected && !!messageSorted && (
+            {!!messageSorted && (
                 <Orders data={messageSorted!} />
             )}
         </div>

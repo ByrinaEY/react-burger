@@ -2,10 +2,10 @@ import { TAuthActions } from "../../services/actions/auth";
 import { TBurgerConstructorActions} from "../../services/actions/burger-constructor";
 import {TCreateOrderActions} from "../../services/actions/create-order";
 import {TLoadIngredientsActions} from "../../services/actions/burger-ingredients";
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkDispatch } from 'redux-thunk';
 import store from "../../services/store";
-import { TOrdersAllActions, TwsOrdersAllActions } from "../../services/actions/orders-all";
-import {TOrdersUserActions, TwsOrdersUserActions} from '../../services/actions/orders-user'
+import { TOrdersAllActions } from "../../services/actions/orders-all";
+import {TOrdersUserActions} from '../../services/actions/orders-user'
 export type TIngredient = {
     _id: string;
     name: string;
@@ -62,7 +62,7 @@ export type TOrdersList = {
     total: number;
     totalToday: number;
 }
-//export type AppActions = WSActions | TUserActions;
+
 
 export type RootState = ReturnType<typeof store.getState>;
 
@@ -70,9 +70,7 @@ export type TDispatch = typeof store.dispatch;
 
 export type TApplicationActions = TAuthActions 
  | TBurgerConstructorActions | TCreateOrderActions | TLoadIngredientsActions | TOrdersAllActions | TOrdersUserActions   ;
-//   |  TIngredientWindowActions  | TTabInfoActions | 
-//      | TGetOrderActions;
+
 
 export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
 
-export type wsActionsTypes = TwsOrdersAllActions | TwsOrdersUserActions;

@@ -1,5 +1,6 @@
 import { setCookie, getCookie } from "./cookie";
-import {API_TOKEN} from './server';
+import {API_TOKEN, URL} from './server';
+
 export default async function requestRefresh(
   url: string,
   options: RequestInit
@@ -34,9 +35,10 @@ function checkResponse(res: Response) {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
+
 export function refreshToken() {
   return request(
-    API_TOKEN,
+    `${URL}${API_TOKEN}`,
     postOptions({ token: localStorage.getItem("refreshToken") })
   );}
 
@@ -45,7 +47,7 @@ export function refreshToken() {
   }
 
 
-function postOptions(obj: {}, auth?: boolean) {
+function postOptions(obj: {}) {
   return requestOptions("POST", auth ? { Authorization: "Bearer " + getCookie("accessToken") } : {}, obj);
 }
 

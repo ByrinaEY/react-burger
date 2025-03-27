@@ -54,7 +54,7 @@ const CardOrder: FC<TProp> = ({ order, isPerson }) => {
   return (
     <Link className={`${styles.main}`}
     to={`${location.pathname}/${order.number}`}
-    state={{ location: location }}
+    state={{ background: location }}
   > 
     <div className="m-6">
       <div className={styles.main}>
