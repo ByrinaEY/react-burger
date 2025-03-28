@@ -48,7 +48,7 @@ export function refreshToken() {
 
 
 function postOptions(obj: {}) {
-  return requestOptions("POST", auth ? { Authorization: "Bearer " + getCookie("accessToken") } : {}, obj);
+  return requestOptions("POST", { Authorization: "Bearer " + getCookie("accessToken") } , obj);
 }
 
 function requestOptions(method: 'GET' | 'POST' | 'PATCH', headers: {} = {}, body?: {}) {

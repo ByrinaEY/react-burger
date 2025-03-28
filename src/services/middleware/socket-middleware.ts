@@ -57,24 +57,27 @@ export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
 
         socket.onmessage = event => {
           const { data } = event;
-          const parsedData = JSON.parse(data);
-          // if (!parsedData?.success) {
-          //   if (parsedData?.message === 'Invalid or missing token') {
-          //     refreshToken()
-          //     .then(result  =>{
-          //       const wssUrl = new URL(url);
-          //       wssUrl.searchParams.set("token", result.accessToken.replace("Bearer ",""));
-          //       dispatch({ type: wsActions.connect, url: url });
-          //     })
-          //     .catch((err:any): void =>{
-          //       dispatch({ type: wsActions.onError, error: err });
-          //     })
-          //   }
-          //   dispatch({ type: wsActions.onError, error: parsedData?.message });
-          // } else {
-            const { success, ...restParsedData } = parsedData;
-            dispatch({ type: wsActions.onMessage, message: restParsedData });
-        //  }
+         
+          try{
+            const parsedData = JSON.parse(data);
+            if (!parsedData?.success && parsedData.message == 'Invalid or missing token') {
+              refreshToken()
+              .then(refreshedData => {
+                const wssUrl = new URL(url);
+                  wssUrl.searchParams.set("token", refreshedData.accessToken.replace("Bearer ",""));
+                  dispatch({ type: wsActions.connect, url: url });
+              })
+              .catch((err:any): void =>{
+                   dispatch({ type: wsActions.onError, error: err });
+           });
+           dispatch(disconnect());
+           return;}
+           const { success, ...restParsedData } = parsedData;
+           dispatch({ type: wsActions.onMessage, message: restParsedData });
+          }
+          catch (error) {
+            dispatch({ type: wsActions.onError, error: error });
+          }
         };
 
         socket.onerror = event => {
