@@ -64,13 +64,13 @@ export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
               refreshToken()
               .then(refreshedData => {
                 const wssUrl = new URL(url);
-                  wssUrl.searchParams.set("token", refreshedData.accessToken.replace("Bearer ",""));
+                  wssUrl.searchParams.set("token", refreshedData);
                   dispatch({ type: wsActions.connect, url: url });
               })
               .catch((err:any): void =>{
                    dispatch({ type: wsActions.onError, error: err });
            });
-           dispatch(disconnect());
+           dispatch({type: wsActions.disconnect});
            return;}
            const { success, ...restParsedData } = parsedData;
            dispatch({ type: wsActions.onMessage, message: restParsedData });
@@ -78,6 +78,7 @@ export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
           catch (error) {
             dispatch({ type: wsActions.onError, error: error });
           }
+
         };
 
         socket.onerror = event => {
