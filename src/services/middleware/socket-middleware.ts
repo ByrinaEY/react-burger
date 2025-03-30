@@ -1,9 +1,8 @@
-import type {Middleware, MiddlewareAPI } from 'redux';
+import type {Middleware} from 'redux';
 import {refreshToken} from '../../components/utils/request-refresh';
-import { getCookie } from '../../components/utils/cookie';
 import  {getEventMessage} from '../../components/utils/message';
 
-import type { AppDispatch, RootState, wsActionsTypes } from '../../components/utils/type';
+import type {RootState} from '../../components/utils/type';
 
 export type TWSActionTypes = {
   connect: string,
@@ -16,7 +15,7 @@ export type TWSActionTypes = {
 }
 
 
-export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
+export const socketMiddleware = (wsActions: TWSActionTypes, withToken = false): Middleware <{}, RootState> => {
   return (store) => {
     let socket: WebSocket | null = null;
     let timerWsReconnect = 0;
@@ -60,12 +59,13 @@ export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
          
           try{
             const parsedData = JSON.parse(data);
-            if (!parsedData?.success && parsedData.message == 'Invalid or missing token') {
+            if (withToken && parsedData.message == 'Invalid or missing token') {
               refreshToken()
               .then(refreshedData => {
                 const wssUrl = new URL(url);
-                  wssUrl.searchParams.set("token", refreshedData);
-                  dispatch({ type: wsActions.connect, url: url });
+                wssUrl.searchParams.set("token", refreshedData.accessToken.replace("Bearer ", ""));
+                dispatch(connect(wssUrl.toString()));
+
               })
               .catch((err:any): void =>{
                    dispatch({ type: wsActions.onError, error: err });

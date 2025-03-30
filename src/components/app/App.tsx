@@ -77,6 +77,7 @@ function App() {
           <Route path="logout" element={<ProfileLogout />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
+        <Route path="/profile/orders/:id" element={<OrderPage/>} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
 
@@ -93,6 +94,14 @@ function App() {
           />
            <Route
           path="/feed/:id"
+          element={
+            <Modal title={""} onClose={closeModalWindow}>
+              <OrderInfo/>
+            </Modal>
+          }
+        />
+        <Route
+          path="/profile/orders/:id"
           element={
             <Modal title={""} onClose={closeModalWindow}>
               <OrderInfo/>

@@ -1,5 +1,5 @@
 import {URL, API_USER} from './server';
- import requestRefresh from './request-refresh';
+ import {requestRefresh} from './request-refresh';
  import {getCookie } from "./cookie";
 
 

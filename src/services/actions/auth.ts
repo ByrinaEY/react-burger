@@ -242,15 +242,18 @@ export const authLoginAction = (user: TUser) => (dispatch: AppDispatch) => {
 
 export const authLogoutAction = () => (dispatch: AppDispatch) => {
     dispatch({ type: AUTH_LOGOUT_START });
-    localStorage.removeItem("refreshToken");
-    deleteCookie("accessToken");
     logoutUser(LOGOUT)
       .then((result) => {
         dispatch({ type: AUTH_LOGOUT_SUCCESS });
       })
       .catch((err) => {
         dispatch({ type: AUTH_LOGOUT_ERROR, message: err.message });
-      });
+      })
+      .finally(() => {
+        localStorage.removeItem("refreshToken");
+        deleteCookie("accessToken");
+    });
+
   };
 
 export const recoverPWAction = (email: string) => (dispatch: AppDispatch) =>{

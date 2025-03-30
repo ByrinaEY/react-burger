@@ -1,9 +1,9 @@
 export const CREATE_ORDER_START: "CREATE_ORDER_STAR"= "CREATE_ORDER_STAR";
 export const CREATE_ORDER_SUCCESS: "CREATE_ORDER_SUCCESS"= "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_ERROR: "CREATE_ORDER_ERROR" = "CREATE_ORDER_ERROR";
-import { ORDER } from '../../components/utils/server';
 import getDataWithPost from '../../components/utils/data-post';
 import {TIngredient, AppDispatch} from '../../components/utils/type.js';
+import {orderCreate} from '../../components/utils/request-refresh';
 
 export interface ICreateOrderAction {
     type: typeof CREATE_ORDER_START;
@@ -24,7 +24,7 @@ export type TCreateOrderActions = ICreateOrderAction | ICreateOrderSuccessAction
 export function createOrderAction(orderIngredients: Array<TIngredient>) {
     return function(dispatch: AppDispatch) {
         dispatch({type: CREATE_ORDER_START});
-		getDataWithPost(ORDER, {'ingredients':  orderIngredients})
+		orderCreate(orderIngredients)
        		.then(result => {
                	dispatch({
 					type: CREATE_ORDER_SUCCESS,

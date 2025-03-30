@@ -6,6 +6,7 @@ import { WS_URL } from '../../components/utils/server';
 import styles from './profile-orders.module.css';
 import Orders from '../../components/orders/orders';
 import { TOrdersList } from '../../components/utils/type';
+import {getCookie} from "../../components/utils/cookie";
 
 function ProfileOrders() {
     const dispatch = useDispatch();
@@ -20,7 +21,8 @@ function ProfileOrders() {
     }, [message]);
 
     useEffect(() => {
-        dispatch({ type: ORDERS_USER_START, url: `${WS_URL}/orders`, addToken: true });
+        const token = getCookie("accessToken");
+        dispatch({ type: ORDERS_USER_START, url: `${WS_URL}/orders?token=${token}`});
         return () => {
             dispatch({ type: ORDERS_USER_END });
         }
@@ -31,7 +33,7 @@ function ProfileOrders() {
             {/* {!connected && <p className={`mb-2 error-text text text_type_main-default`}>loading</p>} */}
             {!!error && <p className={`mb-2 error-text text text_type_main-default`}>{error}</p>}
             {!!messageSorted && (
-                <Orders data={messageSorted!} />
+                <Orders data={messageSorted!} isPerson={true}/>
             )}
         </div>
     );

@@ -24,7 +24,7 @@ function OrderList() {
             { !!message && (
               
       <div className={styles.div}>
-        <Orders data={message} />
+        <Orders data={message} isPerson={false} />
         <OrdersInProgress data={message} /> 
       </div>)}
     </div>
