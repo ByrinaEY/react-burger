@@ -3,7 +3,7 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsCard from "./burger-ingredients-card/burger-ingredients-card";
 import { TIngredient } from "../utils/data-prop-types";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../components/hook/redux';
 import { loadIngredients } from "../../services/selectors";
 
 const BurgerIngredients: FC = () => {

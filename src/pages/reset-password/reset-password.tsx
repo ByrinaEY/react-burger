@@ -6,7 +6,7 @@ import {
 import { useEffect, useCallback } from "react";
 import styles from "./reset-password.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import { auth } from "../../services/selectors";
 import { resetPWAction } from "../../services/actions/auth";
 import { AUTH_CLEAR_ERRORS } from "../../services/actions/auth";
@@ -23,7 +23,7 @@ export function ResetPassword() {
 
     const submitCb = useCallback(
       (state: TState) => {
-        dispatch(resetPWAction(state) as any);
+        dispatch(resetPWAction(state));
       },
       [dispatch]
     );

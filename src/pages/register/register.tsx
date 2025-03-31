@@ -7,7 +7,7 @@ import {
 import { useEffect, useCallback } from "react";
 import styles from "./register.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import { auth } from "../../services/selectors";
 import { authRegisterAction } from "../../services/actions/auth";
 import { AUTH_CLEAR_ERRORS } from "../../services/actions/auth";
@@ -22,7 +22,7 @@ export function Register() {
   const dispatch = useDispatch();
   const submitCb = useCallback(
     (state: TState) => {
-      dispatch(authRegisterAction(state) as any);
+      dispatch(authRegisterAction(state));
     },
     [dispatch]
   );

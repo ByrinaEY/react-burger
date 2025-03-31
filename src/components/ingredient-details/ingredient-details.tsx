@@ -1,7 +1,7 @@
 import styles from './ingredient-details.module.css';
 import { TIngredient } from '../utils/data-prop-types';
 import { FC } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector } from '../../components/hook/redux';
 import { loadIngredients } from '../../services/selectors.js';
 
 type TProps={

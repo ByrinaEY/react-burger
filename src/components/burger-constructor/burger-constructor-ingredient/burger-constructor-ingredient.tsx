@@ -3,7 +3,7 @@ import styles from './burger-constructor-ingredient.module.css';
 import {useRef, FC} from 'react';
 import { useDrop, useDrag } from "react-dnd";
 import {SWAP_INGREDIENT} from '../../../services/actions/burger-constructor.js'
-import { useDispatch} from 'react-redux';
+import { useDispatch} from '../../../components/hook/redux';
 import { TIngredientConstructor } from '../../utils/data-prop-types';
 
 type TProps ={

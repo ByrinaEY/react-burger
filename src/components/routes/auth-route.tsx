@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector} from '../../components/hook/redux';
 import { Navigate, useLocation } from 'react-router';
 import { auth } from '../../services/selectors';
 

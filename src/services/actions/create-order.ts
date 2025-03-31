@@ -1,7 +1,7 @@
 export const CREATE_ORDER_START: "CREATE_ORDER_STAR"= "CREATE_ORDER_STAR";
 export const CREATE_ORDER_SUCCESS: "CREATE_ORDER_SUCCESS"= "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_ERROR: "CREATE_ORDER_ERROR" = "CREATE_ORDER_ERROR";
-import getDataWithPost from '../../components/utils/data-post';
+export const CLEAR_ORDER:  "CLEAR_ORDER"  = "CLEAR_ORDER";
 import {TIngredient, AppDispatch} from '../../components/utils/type.js';
 import {orderCreate} from '../../components/utils/request-refresh';
 
@@ -18,7 +18,11 @@ export interface ICreateOrderErrorAction {
     type: typeof CREATE_ORDER_ERROR;
 }
 
-export type TCreateOrderActions = ICreateOrderAction | ICreateOrderSuccessAction | ICreateOrderErrorAction;
+export interface IClearOrderAction {
+    type: typeof CLEAR_ORDER;
+}
+
+export type TCreateOrderActions = ICreateOrderAction | ICreateOrderSuccessAction | ICreateOrderErrorAction |  IClearOrderAction;
 
 
 export function createOrderAction(orderIngredients: Array<TIngredient>) {

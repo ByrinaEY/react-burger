@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import { useNavigate } from 'react-router';
 import { authLogoutAction, AUTH_CLEAR_ERRORS } from '../../services/actions/auth';
 import { auth } from '../../services/selectors';
@@ -13,7 +13,7 @@ export function ProfileLogout() {
 
     useEffect(() => {
         if (userLoggedIn) {
-            dispatch(authLogoutAction() as any);
+            dispatch(authLogoutAction());
             setStarted(true);
         }
     }, [userLoggedIn, dispatch]);

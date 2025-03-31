@@ -1,5 +1,5 @@
 import { useMemo, FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import { useParams } from 'react-router';
 import { getOrderAction } from '../../services/actions/get-order';
 
@@ -18,7 +18,7 @@ const OrderInfo: FC<TProps> = ({ item }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getOrderAction(id) as any);
+    dispatch(getOrderAction(id));
   }, [dispatch, id]);
 
   const { order } = useSelector(getOrder);

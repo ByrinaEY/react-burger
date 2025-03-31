@@ -11,7 +11,7 @@ import {
 import getDataWithPost from "../../components/utils/data-post";
 import { getUser, patchUser } from "../../components/utils/load-data-refresh";
 import logoutUser from "../../components/utils/logout";
-import { AppDispatch, TPatchUser, TRegisterUser, TResetPassword, TUser } from "../../components/utils/type";
+import { AppDispatch, TPatchUser, TRegisterUser, TResetPassword, TUser, TForgotPassword, TLoginUser } from "../../components/utils/type";
 import {refreshToken} from '../../components/utils/request-refresh';
 
 export const AUTH_REGISTER_START: "AUTH_REGISTER_START" = "AUTH_REGISTER_START";
@@ -221,9 +221,9 @@ export const authRegisterAction = (form: TRegisterUser) => (dispatch: AppDispatc
   };
 
 
-export const authLoginAction = (user: TUser) => (dispatch: AppDispatch) => {
+export const authLoginAction = (form: TLoginUser) => (dispatch: AppDispatch) => {
     dispatch({ type: AUTH_LOGIN_START });
-    getDataWithPost(LOGIN, user)
+    getDataWithPost(LOGIN, form)
       .then((result) => {
         const accessToken = result.accessToken.split("Bearer ")[1];
         const refreshToken = result.refreshToken;
@@ -256,9 +256,9 @@ export const authLogoutAction = () => (dispatch: AppDispatch) => {
 
   };
 
-export const recoverPWAction = (email: string) => (dispatch: AppDispatch) =>{
+export const recoverPWAction = (form: TForgotPassword) => (dispatch: AppDispatch) =>{
     dispatch({ type: AUTH_FORGOT_PASSWORD_START });
-    getDataWithPost(FORGOT_PASSWORD, { email: email })
+    getDataWithPost(FORGOT_PASSWORD, { email: form })
       .then((result) => {
         console.log(result);
         dispatch({

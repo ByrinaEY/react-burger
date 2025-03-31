@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback , useEffect} from "react";
 import styles from "./forgot-password.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../components/hook/redux';
 import { auth } from "../../services/selectors";
 import { recoverPWAction } from "../../services/actions/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ export function ForgotPassword() {
 
   const submitCb = useCallback(
       (state: TState) => {
-        dispatch(recoverPWAction(state) as any);
+        dispatch(recoverPWAction(state) );
       },
       [dispatch]
     );

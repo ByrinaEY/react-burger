@@ -1,7 +1,7 @@
 import img from '../../images/done.png';
 import PropTypes from 'prop-types';
 import { getOrderDetails } from '../../services/selectors.js'
-import { useSelector } from 'react-redux';
+import { useSelector} from '../../components/hook/redux';
 import {FC } from 'react';
 
 const OrderDetails: FC = () =>{

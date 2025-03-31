@@ -12,7 +12,7 @@ import { ProfileEdit } from "../../pages/profile-edit/profile-edit";
 import { ProfileLogout } from "../../pages/profile-logout/profile-logout";
 import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import OrderList from "../../pages/order-list/order-list";
-import { useDispatch } from "react-redux";
+import { useDispatch} from '../../components/hook/redux';
 import { authGetUserAction } from "../../services/actions/auth";
 import { useEffect } from "react";
 import { OnlyAuth, OnlyUnAuth } from "../routes/auth-route";
@@ -31,11 +31,11 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-    dispatch(loadIngredientsAction() as any);
+    dispatch(loadIngredientsAction());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(authGetUserAction() as any);
+    dispatch(authGetUserAction());
   }, []);
 
   const id = location.pathname.slice(13);

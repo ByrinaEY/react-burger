@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import { getOrdersUser } from '../../services/selectors';
 import { ORDERS_USER_END, ORDERS_USER_START } from '../../services/actions/orders-user';
 import { WS_URL } from '../../components/utils/server';

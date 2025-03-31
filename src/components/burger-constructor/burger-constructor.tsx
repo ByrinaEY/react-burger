@@ -8,7 +8,7 @@ import styles from "./burger-constructor.module.css";
 import { TIngredientConstructor } from "../utils/data-prop-types";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../components/hook/redux';
 import { getIngredientsFromConstructor } from "../../services/selectors.js";
 import { useDrop } from "react-dnd";
 import {
@@ -16,7 +16,7 @@ import {
   SET_TOTAL,
   DELETE_INGREDIENT,
 } from "../../services/actions/burger-constructor.js";
-import { createOrderAction } from "../../services/actions/create-order.js";
+import { createOrderAction, CLEAR_ORDER, } from "../../services/actions/create-order.js";
 import { createUniqKeyForIngredientAction } from "../../services/actions/burger-constructor.js";
 import BurgerConstructorIngredient from "./burger-constructor-ingredient/burger-constructor-ingredient.jsx";
 import { useNavigate } from "react-router";
@@ -33,12 +33,21 @@ const BurgerConstructor: FC = () => {
   const { userLoggedIn, requestStart } = useSelector(auth);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
+
   function showModalWindow() {
     setIsOpenModal(true);
   }
+
   function closeModalWindow() {
     setIsOpenModal(false);
   }
+
+  useEffect(() => {
+    if (!setIsOpenModal){
+      dispatch({ type: CLEAR_ORDER });
+    }
+   
+  },[setIsOpenModal]);
 
   useEffect(() => {
     let sum = 0;
@@ -64,14 +73,14 @@ const BurgerConstructor: FC = () => {
 
   const [, dropTargetTopBun] = useDrop({
     accept: ["bun"],
-    drop(item) {
+    drop(item: TIngredient) {
       dispatch({ type: SET_BUN, item: item });
     },
   });
 
   const [, dropTargetLowerBun] = useDrop({
     accept: ["bun"],
-    drop(item) {
+    drop(item: TIngredient) {
       dispatch({ type: SET_BUN, item: item });
     },
   });
@@ -87,14 +96,14 @@ const BurgerConstructor: FC = () => {
     if (!userLoggedIn) {
       navigate("/login", { replace: true });
     } else {
-      let orderIngredients = [];
+      let orderIngredients: Array<TIngredient> = [];
       for (let item of ingredients) {
         orderIngredients.push(item._id);
       }
       if (bun) {
         orderIngredients.push(bun._id, bun._id);
       }
-      dispatch(createOrderAction(orderIngredients) as any);
+      dispatch(createOrderAction(orderIngredients));
     }
     showModalWindow();
   }, [requestStart, userLoggedIn, navigate, ingredients, bun, dispatch]);

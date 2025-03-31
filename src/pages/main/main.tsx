@@ -1,7 +1,7 @@
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients.js';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor.js';
 import styles from './main.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector} from '../../components/hook/redux';
 import { loadIngredients } from '../../services/selectors.js';
 
 

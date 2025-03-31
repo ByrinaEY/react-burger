@@ -3,7 +3,7 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {useSelector } from "react-redux";
+import { useSelector } from '../../components/hook/redux';
 import { loadIngredients } from "../../services/selectors";
 import { TIngredient, TOrder } from "../../components/utils/type";
 import { FC, useMemo } from "react";

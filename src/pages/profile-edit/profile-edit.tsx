@@ -1,31 +1,26 @@
 import { Input, EmailInput, PasswordInput , Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useCallback, useEffect, FormEvent } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from '../../components/hook/redux';
 import {auth } from '../../services/selectors';
 import { useNavigate } from 'react-router-dom';
 import {useForm} from '../../components/hook/useForm';
 import {authPatchUserAction, AUTH_CLEAR_ERRORS} from '../../services/actions/auth';
 import styles from './profile-edit.module.css';
+import { TPatchUser, TSubmit } from '../../components/utils/type';
 
-type TState= {
-    name: string;
-    email: string;
-    password: string;
-    wasSubmit?: boolean;
-   
-}
+type TState = TPatchUser & TSubmit;
 export  function ProfileEdit(){
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const submitCb = useCallback((state: TState) => {
-        dispatch(authPatchUserAction(state) as any);
+        dispatch(authPatchUserAction(state));
     }, [dispatch]);
 
     const { requestStart, requestError, requestSuccess, user } = useSelector(auth);
    
-    const { state, setState, onChange, onSubmit } = useForm({
+    const { state, setState, onChange, onSubmit } = useForm<TState>({
         name: "",
         email: "",
         password: ""

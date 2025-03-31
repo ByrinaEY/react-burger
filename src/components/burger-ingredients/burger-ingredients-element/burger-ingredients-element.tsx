@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients-element.module.css";
 import { TIngredient } from "../../utils/data-prop-types.js";
-import { useSelector } from "react-redux";
+import {useSelector } from '../../../components/hook/redux';
 import { useDrag } from "react-dnd";
 import { getIngredientsFromConstructor } from "../../../services/selectors.js";
 import { useMemo } from "react";

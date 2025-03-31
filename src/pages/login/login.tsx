@@ -6,7 +6,7 @@ import {
 import {useCallback } from "react";
 import styles from "./login.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch} from '../../components/hook/redux';
 import { authLoginAction } from "../../services/actions/auth";
 import { useForm } from "../../components/hook/useForm";
 import { TLoginUser } from "../../components/utils/load-data-refresh";
@@ -19,7 +19,7 @@ export function Login() {
   const dispatch = useDispatch();
   const submitCb = useCallback(
     (state: TState) => {
-      dispatch(authLoginAction(state) as any);
+      dispatch(authLoginAction(state));
     },
     [dispatch]
   );
