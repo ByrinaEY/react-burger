@@ -60,24 +60,24 @@ function App() {
         />
         <Route
           path="/register"
-          element={<OnlyUnAuth component={<Register />} onlyUnAuth={true} />}
+          element={<OnlyUnAuth element={<Register />} onlyUnAuth={true} />}
         />
         <Route
           path="/login"
-          element={<OnlyUnAuth component={<Login />} onlyUnAuth={true} />}
+          element={<OnlyUnAuth element={<Login />} onlyUnAuth={true} />}
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
-          element={<OnlyAuth component={<Profile />} onlyUnAuth={false} />}
+          element={<OnlyAuth element={<Profile />} onlyUnAuth={false}/>}
         >
           <Route index element={<ProfileEdit />} />
           <Route path="orders" element={<ProfileOrders />} />
           <Route path="logout" element={<ProfileLogout />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
-        <Route path="/profile/orders/:id" element={<OrderPage/>} />
+        <Route path="/profile/orders/:id" element={<OrderPage />}/>
         <Route path="*" element={<NotFound404 />} />
       </Routes>
 

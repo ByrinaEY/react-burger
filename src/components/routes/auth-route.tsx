@@ -5,9 +5,9 @@ import { auth } from '../../services/selectors';
 
 type TProps={
   onlyUnAuth: boolean;
-  component: React.ReactNode;
+  element: React.ReactNode;
 }
-const Protected : FC <TProps>= ({ onlyUnAuth = false, component }) => {
+const Protected : FC <TProps>= ({ onlyUnAuth = false, element }) => {
   
   const {requestStart, userLoggedIn, user} = useSelector(auth);
   const location = useLocation();
@@ -28,12 +28,12 @@ const Protected : FC <TProps>= ({ onlyUnAuth = false, component }) => {
 
  
 
-  return component;
+  return element;
 };
 
 
 export const OnlyAuth = Protected;
-export const OnlyUnAuth : FC <TProps>= ({ component }) => (
-  <Protected onlyUnAuth={true} component={component} />
+export const OnlyUnAuth : FC <TProps>= ({ element }) => (
+  <Protected onlyUnAuth={true} element={element} />
 );
 
