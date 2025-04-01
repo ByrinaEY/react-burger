@@ -1,0 +1,27 @@
+.parent{
+    display:flex;
+    padding-top: 140px;
+    padding-left: 380px;
+}
+
+
+.ul{
+    height: 192px;
+    text-align: left;
+    width: 320px;
+    list-style-type:  none;
+    padding-left: 0;
+    ;
+
+   
+}
+
+.li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+    height: 64px;
+}
+.p{
+    width: 320px;
+    text-align: left;
+}

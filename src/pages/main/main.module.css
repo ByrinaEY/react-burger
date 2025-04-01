@@ -1,0 +1,12 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+.div{
+    display: grid;
+    grid-template-columns: repeat(2, 600px);
+    margin-right: 10;
+   width: 1240px
+}
+

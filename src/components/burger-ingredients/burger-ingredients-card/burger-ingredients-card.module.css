@@ -1,0 +1,16 @@
+.title{
+  text-align: left;
+}
+
+.card{
+  display: grid;
+    grid-template-columns: repeat(2, 272px);
+    grid-template-rows: 208px;
+    align-items: flex-start;
+  grid-column-gap: 6;
+   
+}
+.navlink{
+text-decoration: 'none'; 
+color: rgb(255, 255, 255) !important
+}

@@ -1,0 +1,23 @@
+:root {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.page-container-profile{
+    margin-top: 140px;
+    width: 320px;
+    
+}
+
+.container{
+    display: flex;
+        justify-content: center;
+        /* padding-top: 180px; */
+    /* width: 480px;
+     margin-top: 140px; 
+    margin-left: 780px;  */
+  
+    
+}

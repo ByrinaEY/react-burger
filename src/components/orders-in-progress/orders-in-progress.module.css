@@ -1,0 +1,42 @@
+.main{
+    display: flex;
+        text-align: left;
+        width: 580px;
+        flex-wrap: nowrap;
+        flex-direction:column;
+     
+}
+
+.grid{
+  
+    display: grid;  
+    grid-template-columns: repeat(2, 285px);
+    column-gap: 9;
+    text-align: left;
+    
+    
+}
+
+.column{
+    width: 285px;
+}
+
+.ready_orders{
+    color: #00CCCC;
+}
+
+.list_number_orders {
+    display: flex; 
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    margin-top: 12px;
+  }
+
+  .ul_orders {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
