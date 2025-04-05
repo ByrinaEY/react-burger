@@ -12,7 +12,7 @@ TLoadIngredientsActions} from '../actions/burger-ingredients.js';
         ingredients: Array<TIngredient> | null
     }
 
-const initialState = {
+export const initialState = {
     isLoading: false, 
     hasError: false, 
     ingredients: null

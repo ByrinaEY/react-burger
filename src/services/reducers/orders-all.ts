@@ -10,7 +10,7 @@ type TOrdersAllState = {
     error: string | null;
 };
 
-const initialState: TOrdersAllState = {
+export const initialState: TOrdersAllState = {
     message: null,
     error: null
 };

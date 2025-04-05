@@ -12,7 +12,7 @@ export type TCreateOrderState = {
   orderNumber: number | null;
 };
 
-const initialState: TCreateOrderState = {
+export const initialState: TCreateOrderState = {
   isLoading: false,
   hasError: false,
   orderNumber: null,
