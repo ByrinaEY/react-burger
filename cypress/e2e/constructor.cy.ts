@@ -1,9 +1,11 @@
 /// <reference types="cypress" />
 import login from '../fixtures/login.json';
+const dialog = '[class^=_dialog]';
 
 describe('constuctor page', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173');
+        cy.visit('/');
+        
     });
 
     it('show ingredient detail', () => {
@@ -11,9 +13,10 @@ describe('constuctor page', () => {
         cy.contains('Соберите бургер');
 
         cy.get('#bun > div > div>:first-child').click();
-        cy.get('[class^=_dialog]').contains('Детали ингредиента');
+       // cy.get('[class^=_dialog]').as('dialog');
+        cy.get(dialog).contains('Детали ингредиента');
         cy.get('[class^=_close]').click();
-        cy.get('[class^=_dialog]').should('not.exist');
+        cy.get(dialog).should('not.exist');
     });
 
     it('create order', () => {
@@ -41,6 +44,6 @@ describe('constuctor page', () => {
         cy.get('.text_type_digits-large', { timeout: 20000 }).contains(/\d+/);
         cy.get('[class^=_close]').click();
 
-        cy.get('[class^=_dialog]').should('not.exist');
+        cy.get(dialog).should('not.exist');
     });
 })
