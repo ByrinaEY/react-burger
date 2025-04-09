@@ -1,0 +1,17 @@
+
+.main{
+    width: 480px;
+    padding-top: 140px;
+    
+}
+
+.bottom{
+   display: flex; 
+   flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    padding: 5px;
+}
