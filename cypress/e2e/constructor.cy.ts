@@ -13,7 +13,6 @@ describe('constuctor page', () => {
         cy.contains('Соберите бургер');
 
         cy.get('#bun > div > div>:first-child').click();
-       // cy.get('[class^=_dialog]').as('dialog');
         cy.get(dialog).contains('Детали ингредиента');
         cy.get('[class^=_close]').click();
         cy.get(dialog).should('not.exist');
@@ -25,8 +24,8 @@ describe('constuctor page', () => {
         cy.get('#main > div > div>:first-child').as('main');
         cy.get('#sauce > div > div>:first-child').as('sauce');
         
-        cy.get(':nth-child(1) > ._empty-element_1ceve_67').as('bun-dest');
-        cy.get('._scroll_1ceve_9 > ._empty-element_1ceve_67').as('ingredient-dest');
+        cy.get('[class^=_empty-element-text]').contains('Перетащите булочку').as('bun-dest');
+        cy.get('[class^=_empty-element-text]').contains('Перетащите ингредиенты').as('ingredient-dest');
         cy.get('.button').as('order-button');
 
         cy.get('@bun').trigger('dragstart');
